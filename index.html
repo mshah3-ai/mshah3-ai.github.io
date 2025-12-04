@@ -813,4 +813,11 @@ class DNAStrand {
         this.points1.forEach(point => {
             ctx.beginPath();
             ctx.arc(point.x, point.y, 3.5, 0, Math.PI * 2);
-            ctx.fill
+            ctx.fill();
+        });
+        this.points2.forEach(point => {
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 3.5, 0, Math.PI * 2);
+            ctx.fill();
+        });
+        ctx.shadowBlur = 0;

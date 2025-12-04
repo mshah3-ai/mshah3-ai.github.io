@@ -20,7 +20,6 @@
         line-height: 1.6;
     }
     
-    /* Subtle gradient background */
     body::before {
         content: '';
         position: fixed;
@@ -44,7 +43,7 @@
         left: 0;
         right: 0;
         padding: 1.5rem 5%;
-        background: rgba(10, 14, 26, 0.8);
+        background: rgba(10, 14, 26, 0.95);
         backdrop-filter: blur(12px);
         border-bottom: 1px solid rgba(100, 150, 255, 0.1);
         z-index: 1000;
@@ -85,9 +84,10 @@
     }
 
     .hero-content {
-        max-width: 800px;
+        max-width: 900px;
         z-index: 10;
         text-align: center;
+        margin-top: 80px;
     }
 
     .hero-label {
@@ -117,16 +117,16 @@
 
     .hero-description {
         font-size: 1.05rem;
-        color: #71717a;
+        color: #a1a1aa;
         line-height: 1.7;
-        max-width: 650px;
+        max-width: 700px;
         margin: 0 auto 2rem;
     }
 
     .hero-links {
         display: flex;
         gap: 1rem;
-        margin-bottom: 3rem;
+        margin-bottom: 2.5rem;
         justify-content: center;
     }
 
@@ -144,18 +144,21 @@
     .hero-info {
         color: #71717a;
         font-size: 0.95rem;
-        line-height: 1.8;
-        margin-bottom: 3rem;
+        line-height: 2;
+        margin-bottom: 2rem;
+        max-width: 850px;
+        margin-left: auto;
+        margin-right: auto;
     }
 
     .hero-info div {
-        margin-bottom: 0.8rem;
+        margin-bottom: 0.6rem;
+        text-align: center;
     }
 
-    /* Scroll Down Arrow */
     .scroll-down {
         position: absolute;
-        bottom: 3rem;
+        bottom: 2.5rem;
         left: 50%;
         transform: translateX(-50%);
         cursor: pointer;
@@ -208,6 +211,8 @@
         padding: 6rem 5%;
         max-width: 1200px;
         margin: 0 auto;
+        position: relative;
+        z-index: 10;
     }
 
     .section-title {
@@ -343,25 +348,44 @@
     }
 
     .award-item {
-        padding: 1.8rem;
-        background: linear-gradient(135deg, rgba(100, 150, 255, 0.06) 0%, rgba(150, 100, 255, 0.04) 100%);
+        padding: 2rem;
+        background: linear-gradient(135deg, rgba(100, 150, 255, 0.08) 0%, rgba(150, 100, 255, 0.05) 100%);
+        border: 1px solid rgba(100, 150, 255, 0.2);
         border-left: 4px solid rgba(100, 150, 255, 0.6);
-        border-radius: 8px;
-        transition: all 0.3s ease;
+        border-radius: 12px;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .award-item::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 4px;
+        height: 100%;
+        background: linear-gradient(180deg, #6496ff, #9678ff);
+        opacity: 0;
+        transition: opacity 0.4s ease;
     }
     
     .award-item:hover {
-        background: linear-gradient(135deg, rgba(100, 150, 255, 0.1) 0%, rgba(150, 100, 255, 0.06) 100%);
+        background: linear-gradient(135deg, rgba(100, 150, 255, 0.12) 0%, rgba(150, 100, 255, 0.08) 100%);
         border-left-color: rgba(100, 150, 255, 1);
-        transform: translateX(5px);
-        box-shadow: 0 4px 20px rgba(100, 150, 255, 0.15);
+        transform: translateX(8px);
+        box-shadow: 0 8px 30px rgba(100, 150, 255, 0.2);
+    }
+
+    .award-item:hover::before {
+        opacity: 1;
     }
 
     .award-item h4 {
         font-size: 1.1rem;
         color: #fff;
         margin-bottom: 0.3rem;
-        font-weight: 500;
+        font-weight: 600;
     }
 
     .award-item .year {
@@ -524,9 +548,9 @@
             <a href="tel:6302973634">(630) 297-3634</a>
         </div>
         <div class="hero-info">
-            <div><strong style="color: #a1a1aa;">Coursework:</strong> Calculus BC, AP Computer Science A, Honors Biology, Methods of Scientific Research, Chemistry, Physics, Spanish III</div>
-            <div><strong style="color: #a1a1aa;">Schools:</strong> Illinois Mathematics and Science Academy (4.00 GPA) • Waubonsie Valley High School (4.00/4.71 GPA)</div>
-            <div><strong style="color: #a1a1aa;">Languages:</strong> English, Spanish, Gujarati, Hindi</div>
+            <div><strong style="color: #a8c5ff;">Coursework:</strong> Calculus BC, AP Computer Science A, Honors Biology, Methods of Scientific Research, Chemistry, Physics, Spanish III</div>
+            <div><strong style="color: #a8c5ff;">Schools:</strong> Illinois Mathematics and Science Academy (4.00 GPA) • Waubonsie Valley High School (4.00/4.71 GPA)</div>
+            <div><strong style="color: #a8c5ff;">Languages:</strong> English, Spanish, Gujarati, Hindi</div>
         </div>
     </div>
     
@@ -801,23 +825,3 @@ class DNAStrand {
             ctx.lineTo(conn.x2, conn.y);
             ctx.stroke();
         });
-        
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = 'rgba(100, 150, 255, 0.9)';
-        
-        const gradient2 = ctx.createRadialGradient(0, 0, 0, 0, 0, 5);
-        gradient2.addColorStop(0, 'rgba(200, 220, 255, 1)');
-        gradient2.addColorStop(1, 'rgba(100, 150, 255, 0.8)');
-        ctx.fillStyle = gradient2;
-        
-        this.points1.forEach(point => {
-            ctx.beginPath();
-            ctx.arc(point.x, point.y, 3.5, 0, Math.PI * 2);
-            ctx.fill();
-        });
-        this.points2.forEach(point => {
-            ctx.beginPath();
-            ctx.arc(point.x, point.y, 3.5, 0, Math.PI * 2);
-            ctx.fill();
-        });
-        ctx.shadowBlur = 0;

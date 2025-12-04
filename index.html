@@ -415,6 +415,18 @@
     <h2 class="section-title">Research</h2>
     <div class="research-grid">
         <div class="research-card fade-in">
+            <h3>Researcher at Massachusetts General Hospital / Harvard University</h3>
+            <div class="year">2025 – Present</div>
+            <p>Working under Dr. Das and Dr. Li to model how APOE e4 alters glial responses to Alzheimer's pathology using genotype-specific spatial graphs and GNN/ODE models to predict cognitive decline.</p>
+        </div>
+        
+        <div class="research-card fade-in">
+            <h3>Researcher at Massachusetts Institute of Technology (MIT)</h3>
+            <div class="year">2025 – Present</div>
+            <p>Working under Dr. Kellis and Dr. Schubert to build a dynamic graph neural network modeling blood–brain molecular communication in Parkinson's disease.</p>
+        </div>
+        
+        <div class="research-card fade-in">
             <h3>Un-Distillable LLMs via Entropy-Perturbed Logits</h3>
             <div class="year">2025</div>
             <p>Developed a framework to create provably un-distillable LLMs by applying entropy-based noise to output logits. This approach prevents student models from replicating teacher outputs, establishing theoretical limits on knowledge distillation.</p>
@@ -480,23 +492,8 @@
         </div>
         
         <div class="award-item fade-in">
-            <h4>IHSA State Champions - Scholastic Bowl</h4>
+            <h4>AIME Qualifier</h4>
             <div class="year">2025</div>
-        </div>
-        
-        <div class="award-item fade-in">
-            <h4>1st Place Sectionals - Scholastic Bowl</h4>
-            <div class="year">2025</div>
-        </div>
-        
-        <div class="award-item fade-in">
-            <h4>1st Place Individual ICTM Regionals - Math Team</h4>
-            <div class="year">2025</div>
-        </div>
-        
-        <div class="award-item fade-in">
-            <h4>2x Worlds Qualifier - VEX V5 Robotics</h4>
-            <div class="year">2022, 2024</div>
         </div>
     </div>
 </section>
@@ -599,7 +596,9 @@ class DNAStrand {
             this.points2.push({ x: x2, y });
             
             if (i % 3 === 0) {
-                this.connections.push({ x1, x2, y });
+                // Alternate between base pair types
+                const baseType = Math.floor(i / 3) % 4; // 4 types: A-T, T-A, G-C, C-G
+                this.connections.push({ x1, x2, y, baseType });
             }
         }
     }
@@ -630,15 +629,26 @@ class DNAStrand {
         });
         ctx.stroke();
         
-        // Draw connections with gradient
-        const gradient2 = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        gradient2.addColorStop(0, 'rgba(168, 197, 255, 0.4)');
-        gradient2.addColorStop(0.5, 'rgba(168, 197, 255, 0.6)');
-        gradient2.addColorStop(1, 'rgba(168, 197, 255, 0.4)');
-        
-        ctx.strokeStyle = gradient2;
+        // Draw connections with different colors for base pairs
         ctx.lineWidth = 2;
         this.connections.forEach(conn => {
+            // Different colors for different base pairs
+            let color;
+            switch(conn.baseType) {
+                case 0: // A-T (Adenine-Thymine) - Light blue
+                    color = 'rgba(100, 180, 255, 0.6)';
+                    break;
+                case 1: // T-A - Cyan
+                    color = 'rgba(100, 220, 255, 0.6)';
+                    break;
+                case 2: // G-C (Guanine-Cytosine) - Purple-blue
+                    color = 'rgba(150, 120, 255, 0.6)';
+                    break;
+                case 3: // C-G - Pink-purple
+                    color = 'rgba(200, 130, 255, 0.6)';
+                    break;
+            }
+            ctx.strokeStyle = color;
             ctx.beginPath();
             ctx.moveTo(conn.x1, conn.y);
             ctx.lineTo(conn.x2, conn.y);

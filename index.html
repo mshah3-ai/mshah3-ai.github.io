@@ -3,9 +3,8 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>My Portfolio</title>
+<title>Mithil Shah</title>
 
-<!-- Google Font -->
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
 <style>
@@ -18,34 +17,23 @@
     }
 
     body {
-        background:#e7f2ff; /* pastel blue */
-        color:#2d3a4b;      /* deep muted blue-gray text */
+        background:#000000;
+        color:#d4e8ff;
         overflow-x:hidden;
     }
 
-    /* ---------- Global Layout ---------- */
-    section {
-        width:100%;
-        min-height:100vh;
-        padding:80px 10%;
-        display:flex;
-        align-items:center;
+    /* Smooth fade-up animation */
+    .fade {
+        opacity:0;
+        transform:translateY(20px);
+        animation:fadeUp 0.8s ease forwards;
+    }
+    @keyframes fadeUp {
+        to {opacity:1; transform:translateY(0);}
     }
 
-    h1, h2 {
-        font-weight:700;
-        letter-spacing:.5px;
-        color:#3c5b8a; /* strong pastel blue for titles */
-    }
-
-    p {
-        max-width:800px;
-        line-height:1.8;
-        opacity:0.9;
-    }
-
-    /* ---------- Navigation ---------- */
-    nav{
+    /* -------- Navigation -------- */
+    nav {
         position:fixed;
         top:0; left:0;
         width:100%;
@@ -53,204 +41,237 @@
         display:flex;
         justify-content:space-between;
         align-items:center;
-        background:rgba(255, 255, 255, 0.6);
-        backdrop-filter:blur(12px);
+        background:rgba(0,0,0,0.65);
+        backdrop-filter:blur(10px);
         z-index:100;
-        border-bottom:1px solid rgba(0,0,0,0.05);
+        border-bottom:1px solid rgba(120,170,255,0.15);
     }
 
     nav a{
-        color:#2d3a4b;
+        color:#a7c8ff;
         text-decoration:none;
         margin-left:30px;
-        font-weight:500;
+        font-weight:400;
         transition:0.3s;
+        letter-spacing:0.5px;
     }
 
     nav a:hover{
-        color:#6ca0ff;
-        transform:translateY(-2px);
+        color:#7ab4ff;
+        text-shadow:0 0 8px #7ab4ff;
     }
 
-    /* ---------- Hero Section ---------- */
-    #home{
-        background:linear-gradient(135deg, #d9ecff, #bcd9ff);
+    nav h2 {
+        color:#9bc5ff;
+        font-weight:600;
+        letter-spacing:1px;
+    }
+
+    /* -------- Sections -------- */
+    section {
+        width:100%;
+        min-height:100vh;
+        padding:120px 10% 80px;
+        display:flex;
+        align-items:center;
+    }
+
+    h1, h2 {
+        color:#cce2ff;
+        font-weight:700;
+        letter-spacing:.5px;
+    }
+
+    p {
+        max-width:750px;
+        line-height:1.75;
+        color:#afc7e6;
+    }
+
+    /* -------- Hero Section -------- */
+    #home {
         flex-direction:column;
         text-align:center;
         justify-content:center;
     }
 
-    #home h1{
+    #home h1 {
         font-size:4rem;
         margin-bottom:10px;
-        color:#2d3a4b;
+        color:#d9e8ff;
+        text-shadow:0 0 15px rgba(120,170,255,0.25);
     }
 
-    #home h3{
+    #home h3 {
         font-weight:300;
-        font-size:1.4rem;
-        opacity:0.7;
-        margin-bottom:20px;
-        color:#3c5b8a;
+        font-size:1.3rem;
+        opacity:0.85;
+        color:#8db7ff;
+        margin-bottom:30px;
     }
 
-    #home button{
-        margin-top:20px;
-        padding:15px 40px;
+    #home button {
+        padding:14px 38px;
         font-size:1rem;
         border:none;
-        background:#7aaeff;
-        color:white;
-        border-radius:30px;
+        background:#7ab4ff;
+        color:#000;
+        border-radius:25px;
         cursor:pointer;
         transition:0.3s;
         font-weight:600;
+        box-shadow:0 0 12px rgba(122,180,255,0.4);
     }
 
-    #home button:hover{
-        transform:scale(1.07);
-        background:#6ca0ff;
-        box-shadow:0 0 15px #a7c8ff;
+    #home button:hover {
+        background:#98c6ff;
+        transform:translateY(-3px);
+        box-shadow:0 0 18px rgba(152,198,255,0.6);
     }
 
-    /* ---------- About Section ---------- */
+    /* -------- About -------- */
     #about {
-        background:#f1f7ff;
+        border-top:1px solid rgba(120,170,255,0.15);
+        border-bottom:1px solid rgba(120,170,255,0.15);
     }
-    #about img{
-        width:280px;
+
+    #about img {
+        width:270px;
         border-radius:50%;
-        margin-right:50px;
-        border:4px solid #a7c8ff;
-        box-shadow:0 0 25px #cfe1ff;
+        margin-right:60px;
+        border:3px solid #7ab4ff;
+        box-shadow:0 0 20px rgba(122,180,255,0.35);
     }
-    #about .content{
+
+    #about .content {
         max-width:700px;
     }
 
-    /* ---------- Skills ---------- */
-    #skills{
-        background:#e7f2ff;
+    /* -------- Skills -------- */
+    #skills {
         flex-direction:column;
         text-align:center;
     }
-    .skills-grid{
+
+    .skills-grid {
         margin-top:50px;
         display:grid;
-        grid-template-columns:repeat(auto-fit, minmax(200px, 1fr));
-        gap:30px;
+        grid-template-columns:repeat(auto-fit, minmax(230px, 1fr));
+        gap:35px;
         width:100%;
     }
 
-    .skill-box{
-        background:#d6e7ff;
-        padding:30px;
-        border-radius:15px;
+    .skill-box {
+        background:#0d0d0d;
+        padding:25px;
+        border-radius:12px;
+        border:1px solid rgba(150,190,255,0.18);
         transition:0.3s;
-        color:#2d3a4b;
+        color:#d4e8ff;
     }
 
-    .skill-box:hover{
-        transform:translateY(-7px);
-        box-shadow:0 0 20px #c7dfff;
+    .skill-box:hover {
+        transform:translateY(-6px);
+        border-color:#7ab4ff;
+        box-shadow:0 0 20px rgba(122,180,255,0.25);
     }
 
-    /* ---------- Projects ---------- */
-    #projects{
-        background:#f1f7ff;
+    /* -------- Projects -------- */
+    #projects {
         flex-direction:column;
         text-align:center;
+        border-top:1px solid rgba(120,170,255,0.15);
     }
 
-    .project-grid{
+    .project-grid {
         margin-top:40px;
         display:grid;
         grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));
-        gap:30px;
+        gap:35px;
         width:100%;
     }
 
-    .project-card{
-        background:#dbe9ff;
-        padding:20px;
-        border-radius:15px;
-        text-align:left;
+    .project-card {
+        background:#0f0f0f;
+        padding:25px;
+        border-radius:12px;
+        border:1px solid rgba(150,190,255,0.18);
         transition:0.3s;
     }
 
-    .project-card:hover{
-        transform:translateY(-7px);
-        box-shadow:0 0 20px #c7dfff;
+    .project-card:hover {
+        transform:translateY(-6px);
+        border-color:#7ab4ff;
+        box-shadow:0 0 18px rgba(122,180,255,0.25);
     }
 
-    .project-card h3{
-        margin-bottom:10px;
-        color:#3c5b8a;
+    .project-card h3 {
+        margin-bottom:12px;
+        color:#a7c8ff;
+        font-weight:600;
     }
 
-    .project-card p{
+    .project-card p {
         opacity:0.85;
-        color:#2d3a4b;
     }
 
-    /* ---------- Contact ---------- */
-    #contact{
-        background:#e7f2ff;
+    /* -------- Contact -------- */
+    #contact {
         flex-direction:column;
         text-align:center;
+        border-top:1px solid rgba(120,170,255,0.15);
     }
 
-    #contact form{
+    #contact form {
         margin-top:30px;
         display:flex;
         flex-direction:column;
         width:100%;
-        max-width:500px;
+        max-width:450px;
     }
 
-    #contact input, #contact textarea{
-        padding:15px;
+    #contact input, #contact textarea {
+        padding:14px;
         margin:10px 0;
-        background:#d6e7ff;
-        border:none;
+        background:#0d0d0d;
+        border:1px solid rgba(150,190,255,0.2);
         border-radius:10px;
-        color:#2d3a4b;
+        color:#d4e8ff;
     }
 
-    #contact button{
-        margin-top:10px;
-        padding:15px;
+    #contact button {
+        margin-top:15px;
+        padding:14px;
         border:none;
-        background:#7aaeff;
-        color:white;
-        font-weight:700;
+        background:#7ab4ff;
+        color:#000;
         border-radius:10px;
         cursor:pointer;
         transition:0.3s;
+        font-weight:600;
+        box-shadow:0 0 12px rgba(122,180,255,0.4);
     }
 
-    #contact button:hover{
-        transform:scale(1.05);
-        background:#6ca0ff;
-        box-shadow:0 0 15px #a7c8ff;
+    #contact button:hover {
+        background:#98c6ff;
+        transform:translateY(-3px);
     }
 
-    /* ---------- Footer ---------- */
-    footer{
-        background:#d9e7ff;
+    /* -------- Footer -------- */
+    footer {
+        background:#000;
         padding:20px;
         text-align:center;
-        opacity:0.8;
-        color:#2d3a4b;
+        opacity:0.7;
+        color:#8fb5ff;
     }
-
 </style>
 </head>
 
 <body>
 
 <nav>
-    <h2 style="color:#3c5b8a;">MyPortfolio</h2>
+    <h2>MITHIL SHAH</h2>
     <div>
         <a href="#home">Home</a>
         <a href="#about">About</a>
@@ -261,25 +282,25 @@
 </nav>
 
 <!-- HERO -->
-<section id="home">
+<section id="home" class="fade">
     <h1>Hello, I'm Mithil Shah</h1>
     <h3>Researcher • Learner • Problem Solver • Designer</h3>
     <button onclick="document.getElementById('about').scrollIntoView()">Explore ↓</button>
 </section>
 
 <!-- ABOUT -->
-<section id="about">
+<section id="about" class="fade">
     <img src="https://via.placeholder.com/280" alt="Profile">
     <div class="content">
         <h2>About Me</h2>
         <p>
-            I'm a sophomore at the Illinois Mathematics and Science Academy researching in the intersection of Biological Sciences, Artificial Intelligence, and Algorithm Development.
+            I'm a sophomore at the Illinois Mathematics and Science Academy researching at the intersection of Biological Sciences, Artificial Intelligence, and Algorithm Development.
         </p>
     </div>
 </section>
 
 <!-- SKILLS -->
-<section id="skills">
+<section id="skills" class="fade">
     <h2>Skills</h2>
     <div class="skills-grid">
         <div class="skill-box">HTML / CSS</div>
@@ -287,12 +308,12 @@
         <div class="skill-box">React</div>
         <div class="skill-box">Node.js</div>
         <div class="skill-box">UI / UX Design</div>
-        <div class="skill-box">API Development</div>
+        <div class="skill-box">Algorithm Design</div>
     </div>
 </section>
 
 <!-- PROJECTS -->
-<section id="projects">
+<section id="projects" class="fade">
     <h2>Projects</h2>
     <div class="project-grid">
         <div class="project-card">
@@ -311,7 +332,7 @@
 </section>
 
 <!-- CONTACT -->
-<section id="contact">
+<section id="contact" class="fade">
     <h2>Contact Me</h2>
     <form>
         <input type="text" placeholder="Your Name">

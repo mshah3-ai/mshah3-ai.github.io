@@ -4,263 +4,656 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Mithil Shah</title>
-
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 <style>
     * {
         margin: 0;
         padding: 0;
         box-sizing: border-box;
-        scroll-behavior: smooth;
-        font-family: "Poppins", sans-serif;
     }
 
     body {
-        background: #000;
-        color: #d4e8ff;
+        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+        background: #0a0a0a;
+        color: #e4e4e7;
         overflow-x: hidden;
+        line-height: 1.6;
     }
 
-    /* Fade-up animation */
-    .fade {
-        opacity: 0;
-        transform: translateY(20px);
-        animation: fadeUp 0.8s ease forwards;
-    }
-    @keyframes fadeUp {
-        to { opacity: 1; transform: translateY(0); }
+    /* Smooth scroll */
+    html {
+        scroll-behavior: smooth;
     }
 
     /* Navigation */
     nav {
         position: fixed;
-        top: 0; left: 0;
-        width: 100%;
-        padding: 20px 10%;
+        top: 0;
+        left: 0;
+        right: 0;
+        padding: 1.5rem 5%;
+        background: rgba(10, 10, 10, 0.8);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        z-index: 1000;
         display: flex;
         justify-content: space-between;
         align-items: center;
-        background: rgba(0, 0, 0, 0.65);
-        backdrop-filter: blur(10px);
-        z-index: 100;
-        border-bottom: 1px solid rgba(120,170,255,0.15);
     }
 
     nav h2 {
-        color: #9bc5ff;
+        font-size: 1.1rem;
         font-weight: 600;
-        letter-spacing: 1px;
+        letter-spacing: 0.5px;
+        color: #fff;
     }
 
     nav a {
-        color: #a7c8ff;
+        color: #a1a1aa;
         text-decoration: none;
-        margin-left: 30px;
-        transition: 0.3s;
+        margin-left: 2rem;
+        font-size: 0.95rem;
         font-weight: 400;
-    }
-    nav a:hover {
-        color: #7ab4ff;
-        text-shadow: 0 0 8px #7ab4ff;
+        transition: color 0.3s;
     }
 
-    /* Sections */
-    section {
-        width: 100%;
+    nav a:hover {
+        color: #fff;
+    }
+
+    /* Hero Section */
+    .hero {
         min-height: 100vh;
-        padding: 120px 10% 80px;
         display: flex;
         align-items: center;
+        padding: 0 5%;
+        position: relative;
+        overflow: hidden;
     }
 
-    h1, h2 {
-        color: #cce2ff;
+    .hero-content {
+        max-width: 800px;
+        z-index: 10;
+    }
+
+    .hero-label {
+        font-size: 0.9rem;
+        color: #71717a;
+        margin-bottom: 1rem;
+        letter-spacing: 1px;
+    }
+
+    .hero h1 {
+        font-size: 3.5rem;
         font-weight: 700;
+        line-height: 1.1;
+        margin-bottom: 1.5rem;
+        background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
     }
 
-    p {
-        max-width: 750px;
+    .hero-subtitle {
+        font-size: 1.3rem;
+        color: #a1a1aa;
+        margin-bottom: 2rem;
+        line-height: 1.6;
+    }
+
+    .hero-description {
+        font-size: 1.05rem;
+        color: #71717a;
         line-height: 1.7;
-        color: #afc7e6;
+        max-width: 650px;
+        margin-bottom: 2rem;
     }
 
-    /* Hero layout */
-    #home {
-        justify-content: space-between;
-        gap: 60px;
+    .hero-links {
+        display: flex;
+        gap: 1rem;
+        margin-bottom: 3rem;
     }
 
-    #home h1 {
-        font-size: 4rem;
-        margin-bottom: 10px;
-        text-shadow: 0 0 10px rgba(120,170,255,0.25);
+    .hero-links a {
+        color: #a1a1aa;
+        text-decoration: none;
+        font-size: 0.95rem;
+        transition: color 0.3s;
     }
 
-    #home h3 {
-        font-weight: 300;
-        opacity: 0.85;
-        color: #8db7ff;
-        margin-bottom: 30px;
+    .hero-links a:hover {
+        color: #fff;
     }
 
-    #home button {
-        padding: 15px 40px;
-        background: #7ab4ff;
-        color: #000;
-        border: none;
-        border-radius: 25px;
+    /* Animated Background */
+    .dna-canvas {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        z-index: 1;
+        opacity: 0.15;
+    }
+
+    /* Section Styling */
+    section {
+        padding: 6rem 5%;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+
+    .section-title {
+        font-size: 2rem;
         font-weight: 600;
-        cursor: pointer;
-        transition: 0.3s;
-        box-shadow: 0 0 12px rgba(122,180,255,0.35);
-    }
-    #home button:hover {
-        background: #98c6ff;
-        transform: translateY(-3px);
+        margin-bottom: 3rem;
+        color: #fff;
     }
 
+    /* Research Cards */
+    .research-grid {
+        display: grid;
+        gap: 2rem;
+    }
+
+    .research-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+    }
+
+    .research-card:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.1);
+        transform: translateY(-2px);
+    }
+
+    .research-card h3 {
+        font-size: 1.3rem;
+        margin-bottom: 0.5rem;
+        color: #fff;
+        font-weight: 600;
+    }
+
+    .research-card .year {
+        color: #71717a;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .research-card p {
+        color: #a1a1aa;
+        line-height: 1.7;
+    }
+
+    /* Skills Grid */
+    .skills-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+    }
+
+    .skill-category h4 {
+        font-size: 1rem;
+        color: #71717a;
+        margin-bottom: 1rem;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        font-weight: 500;
+    }
+
+    .skill-category ul {
+        list-style: none;
+    }
+
+    .skill-category li {
+        color: #a1a1aa;
+        padding: 0.4rem 0;
+        font-size: 0.95rem;
+    }
+
+    /* Awards Grid */
+    .awards-grid {
+        display: grid;
+        gap: 1.5rem;
+    }
+
+    .award-item {
+        padding: 1.5rem;
+        background: rgba(255, 255, 255, 0.02);
+        border-left: 3px solid rgba(255, 255, 255, 0.1);
+        border-radius: 4px;
+    }
+
+    .award-item h4 {
+        font-size: 1.1rem;
+        color: #fff;
+        margin-bottom: 0.3rem;
+        font-weight: 500;
+    }
+
+    .award-item .year {
+        color: #71717a;
+        font-size: 0.9rem;
+    }
+
+    /* Activities */
+    .activities-grid {
+        display: grid;
+        gap: 2rem;
+    }
+
+    .activity-card {
+        background: rgba(255, 255, 255, 0.03);
+        border: 1px solid rgba(255, 255, 255, 0.05);
+        border-radius: 12px;
+        padding: 2rem;
+    }
+
+    .activity-card h3 {
+        font-size: 1.2rem;
+        color: #fff;
+        margin-bottom: 0.5rem;
+        font-weight: 600;
+    }
+
+    .activity-card .role {
+        color: #71717a;
+        font-size: 0.9rem;
+        margin-bottom: 1rem;
+    }
+
+    .activity-card p {
+        color: #a1a1aa;
+        line-height: 1.7;
+    }
+
+    /* Contact Section */
+    .contact-info {
+        max-width: 600px;
+    }
+
+    .contact-item {
+        margin-bottom: 1.5rem;
+    }
+
+    .contact-item h4 {
+        font-size: 0.9rem;
+        color: #71717a;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+    }
+
+    .contact-item a {
+        color: #fff;
+        text-decoration: none;
+        font-size: 1.1rem;
+        transition: color 0.3s;
+    }
+
+    .contact-item a:hover {
+        color: #a1a1aa;
+    }
+
+    /* Footer */
     footer {
         text-align: center;
-        padding: 20px;
-        opacity: 0.65;
-        color: #8fb5ff;
+        padding: 3rem 5%;
+        color: #52525b;
+        font-size: 0.9rem;
+        border-top: 1px solid rgba(255, 255, 255, 0.05);
+    }
+
+    /* Fade-in animation */
+    .fade-in {
+        opacity: 0;
+        transform: translateY(20px);
+        animation: fadeInUp 0.8s ease forwards;
+    }
+
+    @keyframes fadeInUp {
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+        .hero h1 {
+            font-size: 2.5rem;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+        }
+        
+        nav a {
+            margin-left: 1rem;
+            font-size: 0.85rem;
+        }
+        
+        section {
+            padding: 4rem 5%;
+        }
     }
 </style>
 </head>
-
 <body>
 
 <nav>
     <h2>MITHIL SHAH</h2>
     <div>
         <a href="#home">Home</a>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
+        <a href="#research">Research</a>
+        <a href="#awards">Awards</a>
+        <a href="#activities">Activities</a>
         <a href="#contact">Contact</a>
     </div>
 </nav>
 
-<!-- HERO SECTION -->
-<section id="home" class="fade">
-
-    <!-- Minimalist DNA + AI SVG -->
-    <div style="width:38%; min-width:260px;">
-        <svg width="100%" viewBox="0 0 300 300" xmlns="http://www.w3.org/2000/svg">
-
-            <!-- DNA Left Curve -->
-            <path d="M90 20
-                     C 60 80, 60 140, 90 200
-                     C 120 260, 120 310, 90 360"
-                  stroke="#9acbff" stroke-width="4" fill="none" />
-
-            <!-- DNA Right Curve -->
-            <path d="M150 20
-                     C 180 80, 180 140, 150 200
-                     C 120 260, 120 310, 150 360"
-                  stroke="#9acbff" stroke-width="4" fill="none" />
-
-            <!-- DNA Bars -->
-            <line x1="90" x2="150" y1="60" y2="60" stroke="#b7e5ff" stroke-width="3"/>
-            <line x1="90" x2="150" y1="110" y2="110" stroke="#8ecaff" stroke-width="3"/>
-            <line x1="90" x2="150" y1="160" y2="160" stroke="#b7e5ff" stroke-width="3"/>
-            <line x1="90" x2="150" y1="210" y2="210" stroke="#8ecaff" stroke-width="3"/>
-            <line x1="90" x2="150" y1="260" y2="260" stroke="#b7e5ff" stroke-width="3"/>
-
-            <!-- Minimal Neural Network -->
-            <circle cx="230" cy="80"  r="7" fill="#9acbff"/>
-            <circle cx="260" cy="130" r="7" fill="#b7e5ff"/>
-            <circle cx="200" cy="130" r="7" fill="#b7e5ff"/>
-            <circle cx="230" cy="180" r="7" fill="#9acbff"/>
-
-            <!-- Edges -->
-            <line x1="230" y1="80"  x2="260" y2="130" stroke="#9acbff" stroke-width="3"/>
-            <line x1="230" y1="80"  x2="200" y2="130" stroke="#9acbff" stroke-width="3"/>
-            <line x1="200" y1="130" x2="230" y2="180" stroke="#b7e5ff" stroke-width="3"/>
-            <line x1="260" y1="130" x2="230" y2="180" stroke="#b7e5ff" stroke-width="3"/>
-
-        </svg>
-    </div>
-
-    <!-- HERO TEXT -->
-    <div style="width:55%;">
-        <h1>Hello, I'm Mithil Shah</h1>
-        <h3>Researcher • Learner • Problem Solver • Designer</h3>
-        <button onclick="document.getElementById('about').scrollIntoView()">Explore ↓</button>
-    </div>
-
-</section>
-
-<!-- ABOUT -->
-<section id="about" class="fade">
-    <img src="https://via.placeholder.com/280" alt="Profile" 
-         style="border-radius:50%; width:270px; margin-right:50px; border:3px solid #7ab4ff;">
-    <div>
-        <h2>About Me</h2>
-        <p>
-            I'm a sophomore at the Illinois Mathematics and Science Academy researching at the intersection of 
+<!-- Hero Section -->
+<div class="hero" id="home">
+    <canvas class="dna-canvas" id="dnaCanvas"></canvas>
+    <div class="hero-content fade-in">
+        <div class="hero-label">HI, MY NAME IS</div>
+        <h1>Mithil Shah</h1>
+        <div class="hero-subtitle">Researcher • Learner • Problem Solver</div>
+        <p class="hero-description">
+            I'm a sophomore at the Illinois Mathematics and Science Academy, working at the intersection of 
             Biological Sciences, Artificial Intelligence, and Algorithm Development.
         </p>
-    </div>
-</section>
-
-<!-- SKILLS -->
-<section id="skills" class="fade" style="flex-direction:column; text-align:center;">
-    <h2>Skills</h2>
-    <div class="skills-grid" style="
-        display:grid; 
-        margin-top:40px;
-        gap:30px;
-        width:100%;
-        grid-template-columns:repeat(auto-fit, minmax(230px,1fr));
-    ">
-        <div class="skill-box">HTML / CSS</div>
-        <div class="skill-box">JavaScript</div>
-        <div class="skill-box">React</div>
-        <div class="skill-box">Node.js</div>
-        <div class="skill-box">UI / UX Design</div>
-        <div class="skill-box">Algorithm Design</div>
-    </div>
-</section>
-
-<!-- PROJECTS -->
-<section id="projects" class="fade" style="flex-direction:column; text-align:center;">
-    <h2>Projects</h2>
-    <div class="project-grid" style="
-        display:grid;
-        margin-top:40px;
-        gap:35px;
-        width:100%;
-        grid-template-columns:repeat(auto-fit, minmax(300px,1fr));
-    ">
-        <div class="project-card">
-            <h3>Project One</h3>
-            <p>A modern web application built with React and Node.js.</p>
+        <div class="hero-links">
+            <a href="mailto:mshah3@imsa.edu">mshah3@imsa.edu</a>
+            <span style="color: #3f3f46;">•</span>
+            <a href="tel:6302973634">(630) 297-3634</a>
         </div>
-        <div class="project-card">
-            <h3>Project Two</h3>
-            <p>An AI-powered tool that analyzes data in real time.</p>
+        <div style="color: #71717a; font-size: 0.95rem; line-height: 1.8;">
+            <div style="margin-bottom: 0.8rem;"><strong style="color: #a1a1aa;">Coursework:</strong> Calculus BC, AP Computer Science A, Honors Biology, Methods of Scientific Research, Chemistry, Physics, Spanish III</div>
+            <div style="margin-bottom: 0.8rem;"><strong style="color: #a1a1aa;">Schools:</strong> Illinois Mathematics and Science Academy (4.00 GPA) • Waubonsie Valley High School (4.00/4.71 GPA)</div>
+            <div><strong style="color: #a1a1aa;">Languages:</strong> English, Spanish, Gujarati, Hindi</div>
         </div>
-        <div class="project-card">
-            <h3>Project Three</h3>
-            <p>A sleek portfolio site showcasing smooth animations.</p>
+    </div>
+</div>
+
+<!-- Research Section -->
+<section id="research">
+    <h2 class="section-title">Research</h2>
+    <div class="research-grid">
+        <div class="research-card fade-in">
+            <h3>Un-Distillable LLMs via Entropy-Perturbed Logits</h3>
+            <div class="year">2025</div>
+            <p>Developed a framework to create provably un-distillable LLMs by applying entropy-based noise to output logits. This approach prevents student models from replicating teacher outputs, establishing theoretical limits on knowledge distillation.</p>
+        </div>
+        
+        <div class="research-card fade-in">
+            <h3>Hyperbolic Few-Shot Learning for Taxonomic Plant Classification</h3>
+            <div class="year">2025</div>
+            <p>Developed a self-supervised learning framework to pre-train vision models on large-scale, unlabeled datasets to learn robust, in-domain visual representations directly from raw images. Leveraged hyperbolic geometry to better capture hierarchical taxonomic relationships in plant classification.</p>
         </div>
     </div>
 </section>
 
-<!-- CONTACT -->
-<section id="contact" class="fade" style="flex-direction:column; text-align:center;">
-    <h2>Contact Me</h2>
-    <form style="margin-top:30px; display:flex; flex-direction:column; max-width:450px; width:100%;">
-        <input type="text" placeholder="Your Name">
-        <input type="email" placeholder="Email">
-        <textarea rows="5" placeholder="Message"></textarea>
-        <button>Send Message</button>
-    </form>
+<!-- Skills Section -->
+<section id="skills">
+    <h2 class="section-title">Skills & Expertise</h2>
+    <div class="skills-grid">
+        <div class="skill-category fade-in">
+            <h4>Programming</h4>
+            <ul>
+                <li>Python</li>
+                <li>Java</li>
+                <li>MATLAB</li>
+            </ul>
+        </div>
+        
+        <div class="skill-category fade-in">
+            <h4>Tools & Frameworks</h4>
+            <ul>
+                <li>TensorFlow</li>
+                <li>PyTorch</li>
+                <li>Scikit-learn</li>
+                <li>AlphaFold</li>
+                <li>Scanpy</li>
+                <li>Biopython</li>
+                <li>LaTeX</li>
+            </ul>
+        </div>
+        
+        <div class="skill-category fade-in">
+            <h4>Certifications</h4>
+            <ul>
+                <li>Deep Learning Onramp (MATLAB)</li>
+                <li>Honors Chemistry (Northwestern CTD)</li>
+                <li>Calculus (Russian School of Mathematics)</li>
+            </ul>
+        </div>
+    </div>
 </section>
 
-<footer>© 2025 Mithil Shah — All Rights Reserved</footer>
+<!-- Awards Section -->
+<section id="awards">
+    <h2 class="section-title">Awards & Recognition</h2>
+    <div class="awards-grid">
+        <div class="award-item fade-in">
+            <h4>Accepted to NeurIPS 2025 Workshop on Lock-LLM</h4>
+            <div class="year">2025</div>
+        </div>
+        
+        <div class="award-item fade-in">
+            <h4>Accepted to NeurIPS 2025 Workshop on Imageomics</h4>
+            <div class="year">2025</div>
+        </div>
+        
+        <div class="award-item fade-in">
+            <h4>IHSA State Champions - Scholastic Bowl</h4>
+            <div class="year">2025</div>
+        </div>
+        
+        <div class="award-item fade-in">
+            <h4>1st Place Sectionals - Scholastic Bowl</h4>
+            <div class="year">2025</div>
+        </div>
+        
+        <div class="award-item fade-in">
+            <h4>1st Place Individual ICTM Regionals - Math Team</h4>
+            <div class="year">2025</div>
+        </div>
+        
+        <div class="award-item fade-in">
+            <h4>2x Worlds Qualifier - VEX V5 Robotics</h4>
+            <div class="year">2022, 2024</div>
+        </div>
+    </div>
+</section>
+
+<!-- Activities Section -->
+<section id="activities">
+    <h2 class="section-title">Activities & Leadership</h2>
+    <div class="activities-grid">
+        <div class="activity-card fade-in">
+            <h3>Council for Campus Equity</h3>
+            <div class="role">Sophomore Board • 2025 – Present</div>
+            <p>Organized awareness campaigns and facilitated student discussions addressing diversity, equity, and inclusion within the campus community.</p>
+        </div>
+        
+        <div class="activity-card fade-in">
+            <h3>Medical Society</h3>
+            <div class="role">Mentorship Committee • 2025 – Present</div>
+            <p>Facilitate student-mentor communication and ensure everything runs smoothly and dynamically.</p>
+        </div>
+        
+        <div class="activity-card fade-in">
+            <h3>Science Olympiad</h3>
+            <div class="role">2021 – Present</div>
+            <p>Compete in Designer Genes, Engineering CAD, and Robot Tour; apply principles of molecular biology, design engineering, and robotics.</p>
+        </div>
+        
+        <div class="activity-card fade-in">
+            <h3>VEX V5 Robotics</h3>
+            <div class="role">2021 – Present</div>
+            <p>Designed the full bot using CAD; built mechanisms ensuring structural stability. Two-time Worlds Qualifier.</p>
+        </div>
+        
+        <div class="activity-card fade-in">
+            <h3>Math Team</h3>
+            <div class="role">2022 – Present</div>
+            <p>Work individually and collaboratively for answering a multitude of levels and types of math questions.</p>
+        </div>
+    </div>
+</section>
+
+<!-- Contact Section -->
+<section id="contact">
+    <h2 class="section-title">Get in Touch</h2>
+    <div class="contact-info">
+        <div class="contact-item fade-in">
+            <h4>Email</h4>
+            <a href="mailto:mshah3@imsa.edu">mshah3@imsa.edu</a>
+        </div>
+        
+        <div class="contact-item fade-in">
+            <h4>Phone</h4>
+            <a href="tel:6302973634">(630) 297-3634</a>
+        </div>
+    </div>
+</section>
+
+<footer>
+    © 2025 Mithil Shah — All Rights Reserved
+</footer>
+
+<script>
+// DNA Helix Animation
+const canvas = document.getElementById('dnaCanvas');
+const ctx = canvas.getContext('2d');
+
+function resizeCanvas() {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+}
+resizeCanvas();
+window.addEventListener('resize', resizeCanvas);
+
+class DNAStrand {
+    constructor() {
+        this.points1 = [];
+        this.points2 = [];
+        this.connections = [];
+        this.time = 0;
+        this.amplitude = 80;
+        this.frequency = 0.02;
+        this.speed = 0.01;
+        this.spacing = 30;
+        this.numPoints = Math.ceil(canvas.height / this.spacing);
+    }
+
+    update() {
+        this.time += this.speed;
+        this.points1 = [];
+        this.points2 = [];
+        this.connections = [];
+
+        for (let i = 0; i < this.numPoints; i++) {
+            const y = i * this.spacing;
+            const offset = this.time + i * this.frequency;
+            
+            const x1 = canvas.width * 0.7 + Math.sin(offset) * this.amplitude;
+            const x2 = canvas.width * 0.7 + Math.sin(offset + Math.PI) * this.amplitude;
+            
+            this.points1.push({ x: x1, y });
+            this.points2.push({ x: x2, y });
+            
+            if (i % 3 === 0) {
+                this.connections.push({ x1, x2, y });
+            }
+        }
+    }
+
+    draw() {
+        // Draw strands
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        ctx.lineWidth = 3;
+        
+        // First strand
+        ctx.beginPath();
+        this.points1.forEach((point, i) => {
+            if (i === 0) ctx.moveTo(point.x, point.y);
+            else ctx.lineTo(point.x, point.y);
+        });
+        ctx.stroke();
+        
+        // Second strand
+        ctx.beginPath();
+        this.points2.forEach((point, i) => {
+            if (i === 0) ctx.moveTo(point.x, point.y);
+            else ctx.lineTo(point.x, point.y);
+        });
+        ctx.stroke();
+        
+        // Draw connections
+        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+        ctx.lineWidth = 2;
+        this.connections.forEach(conn => {
+            ctx.beginPath();
+            ctx.moveTo(conn.x1, conn.y);
+            ctx.lineTo(conn.x2, conn.y);
+            ctx.stroke();
+        });
+        
+        // Draw nodes
+        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+        this.points1.forEach(point => {
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+            ctx.fill();
+        });
+        this.points2.forEach(point => {
+            ctx.beginPath();
+            ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
+            ctx.fill();
+        });
+    }
+}
+
+const dna = new DNAStrand();
+
+function animate() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    dna.update();
+    dna.draw();
+    requestAnimationFrame(animate);
+}
+
+animate();
+
+// Intersection Observer for fade-in animations
+const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+};
+
+const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+            setTimeout(() => {
+                entry.target.style.opacity = '1';
+                entry.target.style.transform = 'translateY(0)';
+            }, index * 100);
+            observer.unobserve(entry.target);
+        }
+    });
+}, observerOptions);
+
+document.querySelectorAll('.fade-in').forEach(el => {
+    observer.observe(el);
+});
+</script>
 
 </body>
 </html>

@@ -14,10 +14,24 @@
 
     body {
         font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        background: #0a0a0a;
+        background: #0a0e1a;
         color: #e4e4e7;
         overflow-x: hidden;
         line-height: 1.6;
+    }
+    
+    /* Subtle gradient background */
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: radial-gradient(circle at 20% 20%, rgba(100, 150, 255, 0.08) 0%, transparent 50%),
+                    radial-gradient(circle at 80% 80%, rgba(150, 100, 255, 0.06) 0%, transparent 50%);
+        pointer-events: none;
+        z-index: 0;
     }
 
     /* Smooth scroll */
@@ -32,9 +46,9 @@
         left: 0;
         right: 0;
         padding: 1.5rem 5%;
-        background: rgba(10, 10, 10, 0.8);
+        background: rgba(10, 14, 26, 0.8);
         backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        border-bottom: 1px solid rgba(100, 150, 255, 0.1);
         z-index: 1000;
         display: flex;
         justify-content: space-between;
@@ -88,7 +102,7 @@
         font-weight: 700;
         line-height: 1.1;
         margin-bottom: 1.5rem;
-        background: linear-gradient(135deg, #fff 0%, #a1a1aa 100%);
+        background: linear-gradient(135deg, #fff 0%, #a8c5ff 50%, #8eb4ff 100%);
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
@@ -96,7 +110,7 @@
 
     .hero-subtitle {
         font-size: 1.3rem;
-        color: #a1a1aa;
+        color: #a8c5ff;
         margin-bottom: 2rem;
         line-height: 1.6;
     }
@@ -134,7 +148,7 @@
         width: 100%;
         height: 100%;
         z-index: 1;
-        opacity: 0.15;
+        opacity: 0.3;
     }
 
     /* Section Styling */
@@ -158,17 +172,18 @@
     }
 
     .research-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(100, 150, 255, 0.04);
+        border: 1px solid rgba(100, 150, 255, 0.15);
         border-radius: 12px;
         padding: 2rem;
         transition: all 0.3s ease;
     }
 
     .research-card:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(255, 255, 255, 0.1);
+        background: rgba(100, 150, 255, 0.08);
+        border-color: rgba(100, 150, 255, 0.3);
         transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(100, 150, 255, 0.1);
     }
 
     .research-card h3 {
@@ -223,9 +238,15 @@
 
     .award-item {
         padding: 1.5rem;
-        background: rgba(255, 255, 255, 0.02);
-        border-left: 3px solid rgba(255, 255, 255, 0.1);
+        background: rgba(100, 150, 255, 0.03);
+        border-left: 3px solid rgba(100, 150, 255, 0.5);
         border-radius: 4px;
+        transition: all 0.3s ease;
+    }
+    
+    .award-item:hover {
+        background: rgba(100, 150, 255, 0.06);
+        border-left-color: rgba(100, 150, 255, 0.8);
     }
 
     .award-item h4 {
@@ -247,10 +268,18 @@
     }
 
     .activity-card {
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(100, 150, 255, 0.04);
+        border: 1px solid rgba(100, 150, 255, 0.15);
         border-radius: 12px;
         padding: 2rem;
+        transition: all 0.3s ease;
+    }
+    
+    .activity-card:hover {
+        background: rgba(100, 150, 255, 0.08);
+        border-color: rgba(100, 150, 255, 0.3);
+        transform: translateY(-2px);
+        box-shadow: 0 8px 24px rgba(100, 150, 255, 0.1);
     }
 
     .activity-card h3 {
@@ -306,7 +335,7 @@
         padding: 3rem 5%;
         color: #52525b;
         font-size: 0.9rem;
-        border-top: 1px solid rgba(255, 255, 255, 0.05);
+        border-top: 1px solid rgba(100, 150, 255, 0.1);
     }
 
     /* Fade-in animation */
@@ -576,8 +605,13 @@ class DNAStrand {
     }
 
     draw() {
-        // Draw strands
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.15)';
+        // Draw strands with gradient
+        const gradient1 = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient1.addColorStop(0, 'rgba(100, 150, 255, 0.6)');
+        gradient1.addColorStop(0.5, 'rgba(120, 180, 255, 0.8)');
+        gradient1.addColorStop(1, 'rgba(100, 150, 255, 0.6)');
+        
+        ctx.strokeStyle = gradient1;
         ctx.lineWidth = 3;
         
         // First strand
@@ -596,8 +630,13 @@ class DNAStrand {
         });
         ctx.stroke();
         
-        // Draw connections
-        ctx.strokeStyle = 'rgba(255, 255, 255, 0.1)';
+        // Draw connections with gradient
+        const gradient2 = ctx.createLinearGradient(0, 0, 0, canvas.height);
+        gradient2.addColorStop(0, 'rgba(168, 197, 255, 0.4)');
+        gradient2.addColorStop(0.5, 'rgba(168, 197, 255, 0.6)');
+        gradient2.addColorStop(1, 'rgba(168, 197, 255, 0.4)');
+        
+        ctx.strokeStyle = gradient2;
         ctx.lineWidth = 2;
         this.connections.forEach(conn => {
             ctx.beginPath();
@@ -606,8 +645,10 @@ class DNAStrand {
             ctx.stroke();
         });
         
-        // Draw nodes
-        ctx.fillStyle = 'rgba(255, 255, 255, 0.2)';
+        // Draw nodes with glow
+        ctx.shadowBlur = 10;
+        ctx.shadowColor = 'rgba(100, 150, 255, 0.8)';
+        ctx.fillStyle = 'rgba(168, 197, 255, 0.8)';
         this.points1.forEach(point => {
             ctx.beginPath();
             ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
@@ -618,6 +659,7 @@ class DNAStrand {
             ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
             ctx.fill();
         });
+        ctx.shadowBlur = 0;
     }
 }
 

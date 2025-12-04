@@ -34,12 +34,10 @@
         z-index: 0;
     }
 
-    /* Smooth scroll */
     html {
         scroll-behavior: smooth;
     }
 
-    /* Navigation */
     nav {
         position: fixed;
         top: 0;
@@ -75,11 +73,12 @@
         color: #fff;
     }
 
-    /* Hero Section */
     .hero {
         min-height: 100vh;
         display: flex;
+        flex-direction: column;
         align-items: center;
+        justify-content: center;
         padding: 0 5%;
         position: relative;
         overflow: hidden;
@@ -88,6 +87,7 @@
     .hero-content {
         max-width: 800px;
         z-index: 10;
+        text-align: center;
     }
 
     .hero-label {
@@ -120,13 +120,14 @@
         color: #71717a;
         line-height: 1.7;
         max-width: 650px;
-        margin-bottom: 2rem;
+        margin: 0 auto 2rem;
     }
 
     .hero-links {
         display: flex;
         gap: 1rem;
         margin-bottom: 3rem;
+        justify-content: center;
     }
 
     .hero-links a {
@@ -140,7 +141,59 @@
         color: #fff;
     }
 
-    /* Animated Background */
+    .hero-info {
+        color: #71717a;
+        font-size: 0.95rem;
+        line-height: 1.8;
+        margin-bottom: 3rem;
+    }
+
+    .hero-info div {
+        margin-bottom: 0.8rem;
+    }
+
+    /* Scroll Down Arrow */
+    .scroll-down {
+        position: absolute;
+        bottom: 3rem;
+        left: 50%;
+        transform: translateX(-50%);
+        cursor: pointer;
+        z-index: 10;
+        animation: float 3s ease-in-out infinite;
+    }
+
+    .scroll-down-arrow {
+        width: 40px;
+        height: 40px;
+        border: 2px solid rgba(100, 150, 255, 0.6);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+    }
+
+    .scroll-down:hover .scroll-down-arrow {
+        border-color: rgba(100, 150, 255, 1);
+        box-shadow: 0 0 20px rgba(100, 150, 255, 0.4);
+        transform: translateY(-5px);
+    }
+
+    .scroll-down-arrow::after {
+        content: '';
+        width: 8px;
+        height: 8px;
+        border-right: 2px solid #a8c5ff;
+        border-bottom: 2px solid #a8c5ff;
+        transform: rotate(45deg) translateY(-2px);
+    }
+
+    @keyframes float {
+        0%, 100% { transform: translateX(-50%) translateY(0); }
+        50% { transform: translateX(-50%) translateY(-10px); }
+    }
+
     .dna-canvas {
         position: absolute;
         top: 0;
@@ -148,10 +201,9 @@
         width: 100%;
         height: 100%;
         z-index: 1;
-        opacity: 0.3;
+        opacity: 0.4;
     }
 
-    /* Section Styling */
     section {
         padding: 6rem 5%;
         max-width: 1200px;
@@ -165,59 +217,114 @@
         color: #fff;
     }
 
-    /* Research Cards */
-    .research-grid {
+    .research-grid, .experience-grid {
         display: grid;
         gap: 2rem;
     }
 
-    .research-card {
-        background: rgba(100, 150, 255, 0.04);
-        border: 1px solid rgba(100, 150, 255, 0.15);
-        border-radius: 12px;
-        padding: 2rem;
-        transition: all 0.3s ease;
+    .research-card, .experience-card {
+        background: linear-gradient(135deg, rgba(100, 150, 255, 0.08) 0%, rgba(150, 100, 255, 0.05) 100%);
+        border: 1px solid rgba(100, 150, 255, 0.2);
+        border-radius: 16px;
+        padding: 2.5rem;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
     }
 
-    .research-card:hover {
-        background: rgba(100, 150, 255, 0.08);
-        border-color: rgba(100, 150, 255, 0.3);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(100, 150, 255, 0.1);
+    .research-card::before, .experience-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #6496ff, #9678ff);
+        opacity: 0;
+        transition: opacity 0.4s ease;
     }
 
-    .research-card h3 {
+    .research-card:hover, .experience-card:hover {
+        background: linear-gradient(135deg, rgba(100, 150, 255, 0.12) 0%, rgba(150, 100, 255, 0.08) 100%);
+        border-color: rgba(100, 150, 255, 0.4);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(100, 150, 255, 0.2);
+    }
+
+    .research-card:hover::before, .experience-card:hover::before {
+        opacity: 1;
+    }
+
+    .research-card h3, .experience-card h3 {
         font-size: 1.3rem;
         margin-bottom: 0.5rem;
         color: #fff;
         font-weight: 600;
     }
 
-    .research-card .year {
+    .research-card .year, .experience-card .year {
         color: #71717a;
         font-size: 0.9rem;
         margin-bottom: 1rem;
     }
 
-    .research-card p {
+    .research-card p, .experience-card p {
         color: #a1a1aa;
         line-height: 1.7;
+        margin-bottom: 1.5rem;
     }
 
-    /* Skills Grid */
+    .skills-tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.6rem;
+        margin-top: 1.5rem;
+    }
+
+    .skill-tag {
+        background: rgba(100, 150, 255, 0.15);
+        border: 1px solid rgba(100, 150, 255, 0.3);
+        padding: 0.4rem 1rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        color: #a8c5ff;
+        font-weight: 500;
+        transition: all 0.3s ease;
+    }
+
+    .skill-tag:hover {
+        background: rgba(100, 150, 255, 0.25);
+        border-color: rgba(100, 150, 255, 0.5);
+        transform: translateY(-2px);
+    }
+
     .skills-grid {
         display: grid;
         grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
         gap: 2rem;
     }
 
+    .skill-category {
+        background: linear-gradient(135deg, rgba(100, 150, 255, 0.06) 0%, rgba(150, 100, 255, 0.04) 100%);
+        border: 1px solid rgba(100, 150, 255, 0.15);
+        border-radius: 12px;
+        padding: 2rem;
+        transition: all 0.3s ease;
+    }
+
+    .skill-category:hover {
+        background: linear-gradient(135deg, rgba(100, 150, 255, 0.1) 0%, rgba(150, 100, 255, 0.06) 100%);
+        border-color: rgba(100, 150, 255, 0.3);
+        transform: translateY(-2px);
+    }
+
     .skill-category h4 {
         font-size: 1rem;
-        color: #71717a;
+        color: #a8c5ff;
         margin-bottom: 1rem;
         text-transform: uppercase;
         letter-spacing: 1px;
-        font-weight: 500;
+        font-weight: 600;
     }
 
     .skill-category ul {
@@ -230,23 +337,24 @@
         font-size: 0.95rem;
     }
 
-    /* Awards Grid */
     .awards-grid {
         display: grid;
         gap: 1.5rem;
     }
 
     .award-item {
-        padding: 1.5rem;
-        background: rgba(100, 150, 255, 0.03);
-        border-left: 3px solid rgba(100, 150, 255, 0.5);
-        border-radius: 4px;
+        padding: 1.8rem;
+        background: linear-gradient(135deg, rgba(100, 150, 255, 0.06) 0%, rgba(150, 100, 255, 0.04) 100%);
+        border-left: 4px solid rgba(100, 150, 255, 0.6);
+        border-radius: 8px;
         transition: all 0.3s ease;
     }
     
     .award-item:hover {
-        background: rgba(100, 150, 255, 0.06);
-        border-left-color: rgba(100, 150, 255, 0.8);
+        background: linear-gradient(135deg, rgba(100, 150, 255, 0.1) 0%, rgba(150, 100, 255, 0.06) 100%);
+        border-left-color: rgba(100, 150, 255, 1);
+        transform: translateX(5px);
+        box-shadow: 0 4px 20px rgba(100, 150, 255, 0.15);
     }
 
     .award-item h4 {
@@ -261,25 +369,42 @@
         font-size: 0.9rem;
     }
 
-    /* Activities */
     .activities-grid {
         display: grid;
         gap: 2rem;
     }
 
     .activity-card {
-        background: rgba(100, 150, 255, 0.04);
-        border: 1px solid rgba(100, 150, 255, 0.15);
-        border-radius: 12px;
-        padding: 2rem;
-        transition: all 0.3s ease;
+        background: linear-gradient(135deg, rgba(100, 150, 255, 0.08) 0%, rgba(150, 100, 255, 0.05) 100%);
+        border: 1px solid rgba(100, 150, 255, 0.2);
+        border-radius: 16px;
+        padding: 2.5rem;
+        transition: all 0.4s ease;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .activity-card::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: linear-gradient(90deg, #6496ff, #9678ff);
+        opacity: 0;
+        transition: opacity 0.4s ease;
     }
     
     .activity-card:hover {
-        background: rgba(100, 150, 255, 0.08);
-        border-color: rgba(100, 150, 255, 0.3);
-        transform: translateY(-2px);
-        box-shadow: 0 8px 24px rgba(100, 150, 255, 0.1);
+        background: linear-gradient(135deg, rgba(100, 150, 255, 0.12) 0%, rgba(150, 100, 255, 0.08) 100%);
+        border-color: rgba(100, 150, 255, 0.4);
+        transform: translateY(-4px);
+        box-shadow: 0 12px 40px rgba(100, 150, 255, 0.2);
+    }
+
+    .activity-card:hover::before {
+        opacity: 1;
     }
 
     .activity-card h3 {
@@ -300,7 +425,6 @@
         line-height: 1.7;
     }
 
-    /* Contact Section */
     .contact-info {
         max-width: 600px;
     }
@@ -326,10 +450,9 @@
     }
 
     .contact-item a:hover {
-        color: #a1a1aa;
+        color: #a8c5ff;
     }
 
-    /* Footer */
     footer {
         text-align: center;
         padding: 3rem 5%;
@@ -338,7 +461,6 @@
         border-top: 1px solid rgba(100, 150, 255, 0.1);
     }
 
-    /* Fade-in animation */
     .fade-in {
         opacity: 0;
         transform: translateY(20px);
@@ -352,7 +474,6 @@
         }
     }
 
-    /* Responsive */
     @media (max-width: 768px) {
         .hero h1 {
             font-size: 2.5rem;
@@ -379,6 +500,7 @@
     <h2>MITHIL SHAH</h2>
     <div>
         <a href="#home">Home</a>
+        <a href="#experience">Experience</a>
         <a href="#research">Research</a>
         <a href="#awards">Awards</a>
         <a href="#activities">Activities</a>
@@ -386,7 +508,6 @@
     </div>
 </nav>
 
-<!-- Hero Section -->
 <div class="hero" id="home">
     <canvas class="dna-canvas" id="dnaCanvas"></canvas>
     <div class="hero-content fade-in">
@@ -402,48 +523,80 @@
             <span style="color: #3f3f46;">•</span>
             <a href="tel:6302973634">(630) 297-3634</a>
         </div>
-        <div style="color: #71717a; font-size: 0.95rem; line-height: 1.8;">
-            <div style="margin-bottom: 0.8rem;"><strong style="color: #a1a1aa;">Coursework:</strong> Calculus BC, AP Computer Science A, Honors Biology, Methods of Scientific Research, Chemistry, Physics, Spanish III</div>
-            <div style="margin-bottom: 0.8rem;"><strong style="color: #a1a1aa;">Schools:</strong> 
-               • Illinois Mathematics and Science Academy (4.00 GPA) 
-               • Waubonsie Valley High School (4.00/4.71 GPA)
-            </div>
+        <div class="hero-info">
+            <div><strong style="color: #a1a1aa;">Coursework:</strong> Calculus BC, AP Computer Science A, Honors Biology, Methods of Scientific Research, Chemistry, Physics, Spanish III</div>
+            <div><strong style="color: #a1a1aa;">Schools:</strong> Illinois Mathematics and Science Academy (4.00 GPA) • Waubonsie Valley High School (4.00/4.71 GPA)</div>
             <div><strong style="color: #a1a1aa;">Languages:</strong> English, Spanish, Gujarati, Hindi</div>
         </div>
     </div>
+    
+    <div class="scroll-down" onclick="document.getElementById('experience').scrollIntoView()">
+        <div class="scroll-down-arrow"></div>
+    </div>
 </div>
 
-<!-- Research Section -->
+<section id="experience">
+    <h2 class="section-title">Experience</h2>
+    <div class="experience-grid">
+        <div class="experience-card fade-in">
+            <h3>Researcher at Massachusetts General Hospital / Harvard University</h3>
+            <div class="year">2025 – Present</div>
+            <p>Working under Dr. Das and Dr. Li to model how APOE e4 alters glial responses to Alzheimer's pathology using genotype-specific spatial graphs and GNN/ODE models to predict cognitive decline.</p>
+            <div class="skills-tags">
+                <span class="skill-tag">Graph Neural Networks</span>
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">Spatial Analysis</span>
+                <span class="skill-tag">ODE Models</span>
+                <span class="skill-tag">Neuroscience</span>
+            </div>
+        </div>
+        
+        <div class="experience-card fade-in">
+            <h3>Researcher at Massachusetts Institute of Technology (MIT)</h3>
+            <div class="year">2025 – Present</div>
+            <p>Working under Dr. Kellis and Dr. Schubert to build a dynamic graph neural network modeling blood–brain molecular communication in Parkinson's disease.</p>
+            <div class="skills-tags">
+                <span class="skill-tag">Dynamic GNN</span>
+                <span class="skill-tag">TensorFlow</span>
+                <span class="skill-tag">Molecular Biology</span>
+                <span class="skill-tag">Systems Biology</span>
+                <span class="skill-tag">Python</span>
+            </div>
+        </div>
+    </div>
+</section>
+
 <section id="research">
     <h2 class="section-title">Research</h2>
     <div class="research-grid">
         <div class="research-card fade-in">
-            <h3>Researcher at Massachusetts General Hospital / Harvard University</h3>
-            <div class="year">2025 – Present</div>
-            <p>Working under Dr. Das and Dr. Li to model how APOE e4 alters glial responses to Alzheimer's pathology using genotype-specific spatial graphs and GNN/ODE models to predict cognitive decline.</p>
-        </div>
-        
-        <div class="research-card fade-in">
-            <h3>Researcher at Massachusetts Institute of Technology (MIT)</h3>
-            <div class="year">2025 – Present</div>
-            <p>Working under Dr. Kellis and Dr. Schubert to build a dynamic graph neural network modeling blood–brain molecular communication in Parkinson's disease.</p>
-        </div>
-        
-        <div class="research-card fade-in">
             <h3>Un-Distillable LLMs via Entropy-Perturbed Logits</h3>
             <div class="year">2025</div>
             <p>Developed a framework to create provably un-distillable LLMs by applying entropy-based noise to output logits. This approach prevents student models from replicating teacher outputs, establishing theoretical limits on knowledge distillation.</p>
+            <div class="skills-tags">
+                <span class="skill-tag">PyTorch</span>
+                <span class="skill-tag">Deep Learning</span>
+                <span class="skill-tag">Information Theory</span>
+                <span class="skill-tag">Model Security</span>
+                <span class="skill-tag">Python</span>
+            </div>
         </div>
         
         <div class="research-card fade-in">
             <h3>Hyperbolic Few-Shot Learning for Taxonomic Plant Classification</h3>
             <div class="year">2025</div>
             <p>Developed a self-supervised learning framework to pre-train vision models on large-scale, unlabeled datasets to learn robust, in-domain visual representations directly from raw images. Leveraged hyperbolic geometry to better capture hierarchical taxonomic relationships in plant classification.</p>
+            <div class="skills-tags">
+                <span class="skill-tag">Computer Vision</span>
+                <span class="skill-tag">TensorFlow</span>
+                <span class="skill-tag">Self-Supervised Learning</span>
+                <span class="skill-tag">Hyperbolic Geometry</span>
+                <span class="skill-tag">Taxonomy</span>
+            </div>
         </div>
     </div>
 </section>
 
-<!-- Skills Section -->
 <section id="skills">
     <h2 class="section-title">Skills & Expertise</h2>
     <div class="skills-grid">
@@ -470,7 +623,7 @@
         </div>
         
         <div class="skill-category fade-in">
-            <h4>Certifications</h4>
+            <h4>Certifications / Courses</h4>
             <ul>
                 <li>Deep Learning Onramp (MATLAB)</li>
                 <li>Honors Chemistry (Northwestern CTD)</li>
@@ -480,7 +633,6 @@
     </div>
 </section>
 
-<!-- Awards Section -->
 <section id="awards">
     <h2 class="section-title">Awards & Recognition</h2>
     <div class="awards-grid">
@@ -501,7 +653,6 @@
     </div>
 </section>
 
-<!-- Activities Section -->
 <section id="activities">
     <h2 class="section-title">Activities & Leadership</h2>
     <div class="activities-grid">
@@ -537,7 +688,6 @@
     </div>
 </section>
 
-<!-- Contact Section -->
 <section id="contact">
     <h2 class="section-title">Get in Touch</h2>
     <div class="contact-info">
@@ -558,7 +708,6 @@
 </footer>
 
 <script>
-// DNA Helix Animation
 const canvas = document.getElementById('dnaCanvas');
 const ctx = canvas.getContext('2d');
 
@@ -599,24 +748,22 @@ class DNAStrand {
             this.points2.push({ x: x2, y });
             
             if (i % 3 === 0) {
-                // Alternate between base pair types
-                const baseType = Math.floor(i / 3) % 4; // 4 types: A-T, T-A, G-C, C-G
+                const baseType = Math.floor(i / 3) % 4;
                 this.connections.push({ x1, x2, y, baseType });
             }
         }
     }
 
     draw() {
-        // Draw strands with gradient
         const gradient1 = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        gradient1.addColorStop(0, 'rgba(100, 150, 255, 0.6)');
-        gradient1.addColorStop(0.5, 'rgba(120, 180, 255, 0.8)');
-        gradient1.addColorStop(1, 'rgba(100, 150, 255, 0.6)');
+        gradient1.addColorStop(0, 'rgba(100, 150, 255, 0.7)');
+        gradient1.addColorStop(0.3, 'rgba(120, 180, 255, 0.9)');
+        gradient1.addColorStop(0.7, 'rgba(150, 120, 255, 0.9)');
+        gradient1.addColorStop(1, 'rgba(200, 130, 255, 0.7)');
         
         ctx.strokeStyle = gradient1;
         ctx.lineWidth = 3;
         
-        // First strand
         ctx.beginPath();
         this.points1.forEach((point, i) => {
             if (i === 0) ctx.moveTo(point.x, point.y);
@@ -624,7 +771,6 @@ class DNAStrand {
         });
         ctx.stroke();
         
-        // Second strand
         ctx.beginPath();
         this.points2.forEach((point, i) => {
             if (i === 0) ctx.moveTo(point.x, point.y);
@@ -632,23 +778,21 @@ class DNAStrand {
         });
         ctx.stroke();
         
-        // Draw connections with different colors for base pairs
-        ctx.lineWidth = 2;
+        ctx.lineWidth = 2.5;
         this.connections.forEach(conn => {
-            // Different colors for different base pairs
             let color;
             switch(conn.baseType) {
-                case 0: // A-T (Adenine-Thymine) - Light blue
-                    color = 'rgba(100, 180, 255, 0.6)';
+                case 0:
+                    color = 'rgba(100, 180, 255, 0.7)';
                     break;
-                case 1: // T-A - Cyan
-                    color = 'rgba(100, 220, 255, 0.6)';
+                case 1:
+                    color = 'rgba(100, 220, 255, 0.7)';
                     break;
-                case 2: // G-C (Guanine-Cytosine) - Purple-blue
-                    color = 'rgba(150, 120, 255, 0.6)';
+                case 2:
+                    color = 'rgba(150, 120, 255, 0.7)';
                     break;
-                case 3: // C-G - Pink-purple
-                    color = 'rgba(200, 130, 255, 0.6)';
+                case 3:
+                    color = 'rgba(200, 130, 255, 0.7)';
                     break;
             }
             ctx.strokeStyle = color;
@@ -658,57 +802,15 @@ class DNAStrand {
             ctx.stroke();
         });
         
-        // Draw nodes with glow
-        ctx.shadowBlur = 10;
-        ctx.shadowColor = 'rgba(100, 150, 255, 0.8)';
-        ctx.fillStyle = 'rgba(168, 197, 255, 0.8)';
+        ctx.shadowBlur = 12;
+        ctx.shadowColor = 'rgba(100, 150, 255, 0.9)';
+        
+        const gradient2 = ctx.createRadialGradient(0, 0, 0, 0, 0, 5);
+        gradient2.addColorStop(0, 'rgba(200, 220, 255, 1)');
+        gradient2.addColorStop(1, 'rgba(100, 150, 255, 0.8)');
+        ctx.fillStyle = gradient2;
+        
         this.points1.forEach(point => {
             ctx.beginPath();
-            ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
-            ctx.fill();
-        });
-        this.points2.forEach(point => {
-            ctx.beginPath();
-            ctx.arc(point.x, point.y, 3, 0, Math.PI * 2);
-            ctx.fill();
-        });
-        ctx.shadowBlur = 0;
-    }
-}
-
-const dna = new DNAStrand();
-
-function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    dna.update();
-    dna.draw();
-    requestAnimationFrame(animate);
-}
-
-animate();
-
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
-            observer.unobserve(entry.target);
-        }
-    });
-}, observerOptions);
-
-document.querySelectorAll('.fade-in').forEach(el => {
-    observer.observe(el);
-});
-</script>
-
-</body>
-</html>
+            ctx.arc(point.x, point.y, 3.5, 0, Math.PI * 2);
+            ctx.fill

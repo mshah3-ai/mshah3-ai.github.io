@@ -3,9 +3,23 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-<title>Mithil Shah</title>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<title>Mithil Shah | Bio-Computation Researcher</title>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
+    :root {
+        --bg-color: #05050a;
+        --card-bg: rgba(255, 255, 255, 0.03);
+        --card-border: rgba(255, 255, 255, 0.08);
+        --card-hover-border: rgba(100, 200, 255, 0.3);
+        --primary: #3b82f6; /* Blue */
+        --accent: #8b5cf6; /* Violet */
+        --highlight: #2dd4bf; /* Teal/Cyan for Bio */
+        --text-main: #f4f4f5;
+        --text-muted: #a1a1aa;
+        --font-sans: 'Inter', sans-serif;
+        --font-mono: 'JetBrains Mono', monospace;
+    }
+
     * {
         margin: 0;
         padding: 0;
@@ -13,65 +27,78 @@
     }
 
     body {
-        font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-        background: #0a0e1a;
-        color: #e4e4e7;
+        font-family: var(--font-sans);
+        background-color: var(--bg-color);
+        color: var(--text-main);
         overflow-x: hidden;
         line-height: 1.6;
+        background-image: 
+            radial-gradient(circle at 15% 50%, rgba(59, 130, 246, 0.08), transparent 25%),
+            radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08), transparent 25%);
     }
-    
-    body::before {
-        content: '';
+
+    /* Grain Overlay for Texture */
+    body::after {
+        content: "";
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: radial-gradient(circle at 20% 20%, rgba(100, 150, 255, 0.08) 0%, transparent 50%),
-                    radial-gradient(circle at 80% 80%, rgba(150, 100, 255, 0.06) 0%, transparent 50%);
+        top: 0; left: 0; width: 100%; height: 100%;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.04'/%3E%3C/svg%3E");
         pointer-events: none;
-        z-index: 0;
+        z-index: 999;
     }
 
-    html {
-        scroll-behavior: smooth;
-    }
+    html { scroll-behavior: smooth; }
 
+    /* Navigation */
     nav {
         position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        padding: 1.5rem 5%;
-        background: rgba(10, 14, 26, 0.95);
+        top: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        padding: 0.8rem 1.5rem;
+        background: rgba(10, 10, 15, 0.7);
         backdrop-filter: blur(12px);
-        border-bottom: 1px solid rgba(100, 150, 255, 0.1);
+        border: 1px solid var(--card-border);
+        border-radius: 50px;
         z-index: 1000;
         display: flex;
-        justify-content: space-between;
+        gap: 2rem;
         align-items: center;
-    }
-
-    nav h2 {
-        font-size: 1.1rem;
-        font-weight: 600;
-        letter-spacing: 0.5px;
-        color: #fff;
+        width: max-content;
+        box-shadow: 0 10px 30px -10px rgba(0,0,0,0.5);
     }
 
     nav a {
-        color: #a1a1aa;
+        color: var(--text-muted);
         text-decoration: none;
-        margin-left: 2rem;
-        font-size: 0.95rem;
-        font-weight: 400;
-        transition: color 0.3s;
+        font-size: 0.85rem;
+        font-weight: 500;
+        transition: all 0.3s;
+        position: relative;
     }
 
-    nav a:hover {
+    nav a:hover, nav a.active {
         color: #fff;
     }
 
+    nav a::after {
+        content: '';
+        position: absolute;
+        bottom: -4px;
+        left: 50%;
+        transform: translateX(-50%) scaleX(0);
+        width: 100%;
+        height: 2px;
+        background: var(--highlight);
+        transition: transform 0.3s ease;
+        border-radius: 2px;
+    }
+
+    nav a:hover::after {
+        transform: translateX(-50%) scaleX(1);
+    }
+
+    /* Hero Section */
     .hero {
         min-height: 100vh;
         display: flex;
@@ -79,827 +106,761 @@
         align-items: center;
         justify-content: center;
         padding: 0 5%;
-        padding-bottom: 5rem;
         position: relative;
-        overflow: hidden;
-
-    }
-
-    .hero-content {
-        max-width: 900px;
-        z-index: 10;
         text-align: center;
-        margin-top: 80px;
-    }
-
-    .hero-label {
-        font-size: 0.9rem;
-        color: #71717a;
-        margin-bottom: 1rem;
-        letter-spacing: 1px;
-    }
-
-    .hero h1 {
-        font-size: 3.5rem;
-        font-weight: 700;
-        line-height: 1.1;
-        margin-bottom: 1.5rem;
-        background: linear-gradient(135deg, #fff 0%, #a8c5ff 50%, #8eb4ff 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-    }
-
-    .hero-subtitle {
-        font-size: 1.3rem;
-        color: #a8c5ff;
-        margin-bottom: 2rem;
-        line-height: 1.6;
-    }
-
-    .hero-description {
-        font-size: 1.05rem;
-        color: #a1a1aa;
-        line-height: 1.7;
-        max-width: 700px;
-        margin: 0 auto 2rem;
-    }
-
-    .hero-links {
-        display: flex;
-        gap: 1rem;
-        margin-bottom: 2.5rem;
-        justify-content: center;
-    }
-
-    .hero-links a {
-        color: #a1a1aa;
-        text-decoration: none;
-        font-size: 0.95rem;
-        transition: color 0.3s;
-    }
-
-    .hero-links a:hover {
-        color: #fff;
-    }
-
-    .hero-info {
-        color: #71717a;
-        font-size: 0.95rem;
-        line-height: 2;
-        margin-bottom: 2rem;
-        max-width: 850px;
-        margin-left: auto;
-        margin-right: auto;
-    }
-
-    .hero-info div {
-        margin-bottom: 0.6rem;
-        text-align: center;
-    }
-
-    .scroll-down {
-        position: absolute;
-        bottom: 1rem;
-        left: 50%;
-        transform: translateX(-50%);
-        cursor: pointer;
-        z-index: 10;
-        animation: float 3s ease-in-out infinite;
-    }
-
-    .scroll-down-arrow {
-        width: 40px;
-        height: 40px;
-        border: 2px solid rgba(100, 150, 255, 0.6);
-        border-radius: 50%;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.3s ease;
-    }
-
-    .scroll-down:hover .scroll-down-arrow {
-        border-color: rgba(100, 150, 255, 1);
-        box-shadow: 0 0 20px rgba(100, 150, 255, 0.4);
-        transform: translateY(-5px);
-    }
-
-    .scroll-down-arrow::after {
-        content: '';
-        width: 8px;
-        height: 8px;
-        border-right: 2px solid #a8c5ff;
-        border-bottom: 2px solid #a8c5ff;
-        transform: rotate(45deg) translateY(-2px);
-    }
-
-    @keyframes float {
-        0%, 100% { transform: translateX(-50%) translateY(0); }
-        50% { transform: translateX(-50%) translateY(-10px); }
     }
 
     .dna-canvas {
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        z-index: 1;
-        /* Adjusted opacity for a slightly clearer view of the background helix */
-        opacity: 0.5; 
+        top: 0; left: 0; width: 100%; height: 100%;
+        z-index: 0;
+        opacity: 0.6;
+        mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
     }
 
+    .hero-content {
+        z-index: 10;
+        max-width: 900px;
+    }
+
+    .hero-label {
+        font-family: var(--font-mono);
+        color: var(--highlight);
+        font-size: 0.9rem;
+        letter-spacing: 2px;
+        margin-bottom: 1.5rem;
+        display: inline-block;
+        padding: 0.4rem 1rem;
+        background: rgba(45, 212, 191, 0.1);
+        border: 1px solid rgba(45, 212, 191, 0.2);
+        border-radius: 4px;
+    }
+
+    .hero h1 {
+        font-size: 4.5rem;
+        font-weight: 800;
+        letter-spacing: -2px;
+        line-height: 1.1;
+        margin-bottom: 1rem;
+        background: linear-gradient(135deg, #fff 0%, #cbd5e1 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+    }
+
+    .typewriter {
+        font-family: var(--font-mono);
+        font-size: 1.2rem;
+        color: var(--text-muted);
+        margin-bottom: 2rem;
+        min-height: 1.6em;
+    }
+
+    .cursor {
+        display: inline-block;
+        width: 2px;
+        height: 1.2em;
+        background-color: var(--highlight);
+        animation: blink 1s step-end infinite;
+        vertical-align: middle;
+        margin-left: 4px;
+    }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    .hero-description {
+        font-size: 1.1rem;
+        color: var(--text-muted);
+        max-width: 650px;
+        margin: 0 auto 2.5rem;
+    }
+
+    .cta-buttons {
+        display: flex;
+        gap: 1rem;
+        justify-content: center;
+        margin-bottom: 3rem;
+    }
+
+    .btn {
+        padding: 0.8rem 1.5rem;
+        border-radius: 8px;
+        font-weight: 600;
+        text-decoration: none;
+        transition: all 0.3s;
+        font-size: 0.9rem;
+    }
+
+    .btn-primary {
+        background: var(--text-main);
+        color: var(--bg-color);
+        border: 1px solid white;
+    }
+
+    .btn-primary:hover {
+        background: transparent;
+        color: white;
+    }
+
+    .btn-secondary {
+        background: rgba(255,255,255,0.05);
+        color: var(--text-main);
+        border: 1px solid var(--card-border);
+        backdrop-filter: blur(5px);
+    }
+
+    .btn-secondary:hover {
+        border-color: var(--text-muted);
+        background: rgba(255,255,255,0.1);
+    }
+
+    .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 2rem;
+        padding-top: 2rem;
+        border-top: 1px solid var(--card-border);
+        max-width: 800px;
+        margin: 0 auto;
+    }
+
+    .stat-item h4 {
+        color: var(--highlight);
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .stat-item p {
+        font-size: 0.85rem;
+        color: var(--text-muted);
+        margin-top: 0.2rem;
+    }
+
+    /* Sections */
     section {
-        padding: 6rem 5%;
+        padding: 7rem 5%;
         max-width: 1200px;
         margin: 0 auto;
         position: relative;
         z-index: 10;
     }
 
-    .section-title {
-        font-size: 2rem;
-        font-weight: 600;
-        margin-bottom: 3rem;
-        color: #fff;
+    .section-header {
+        margin-bottom: 4rem;
     }
 
-    .research-grid, .experience-grid {
-        display: grid;
-        gap: 2rem;
-    }
-
-    .research-card, .experience-card {
-        background: linear-gradient(135deg, rgba(100, 150, 255, 0.08) 0%, rgba(150, 100, 255, 0.05) 100%);
-        border: 1px solid rgba(100, 150, 255, 0.2);
-        border-radius: 16px;
-        padding: 2.5rem;
-        transition: all 0.4s ease;
-        position: relative;
-        overflow: hidden;
-    }
-
-    .research-card::before, .experience-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #6496ff, #9678ff);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-    }
-
-    .research-card:hover, .experience-card:hover {
-        background: linear-gradient(135deg, rgba(100, 150, 255, 0.12) 0%, rgba(150, 100, 255, 0.08) 100%);
-        border-color: rgba(100, 150, 255, 0.4);
-        transform: translateY(-4px);
-        box-shadow: 0 12px 40px rgba(100, 150, 255, 0.2);
-    }
-
-    .research-card:hover::before, .experience-card:hover::before {
-        opacity: 1;
-    }
-
-    .research-card h3, .experience-card h3 {
-        font-size: 1.3rem;
+    .section-header h2 {
+        font-size: 2.5rem;
+        font-weight: 700;
         margin-bottom: 0.5rem;
-        color: #fff;
-        font-weight: 600;
     }
 
-    .research-card .year, .experience-card .year {
-        color: #71717a;
-        font-size: 0.9rem;
-        margin-bottom: 1rem;
+    .section-header .line {
+        width: 60px;
+        height: 4px;
+        background: linear-gradient(90deg, var(--primary), var(--highlight));
+        border-radius: 2px;
     }
 
-    .research-card p, .experience-card p {
-        color: #a1a1aa;
-        line-height: 1.7;
-        margin-bottom: 1.5rem;
-    }
-
-    .skills-tags {
-        display: flex;
-        flex-wrap: wrap;
-        gap: 0.6rem;
-        margin-top: 1.5rem;
-    }
-
-    .skill-tag {
-        background: rgba(100, 150, 255, 0.15);
-        border: 1px solid rgba(100, 150, 255, 0.3);
-        padding: 0.4rem 1rem;
-        border-radius: 20px;
-        font-size: 0.85rem;
-        color: #a8c5ff;
-        font-weight: 500;
-        transition: all 0.3s ease;
-    }
-
-    .skill-tag:hover {
-        background: rgba(100, 150, 255, 0.25);
-        border-color: rgba(100, 150, 255, 0.5);
-        transform: translateY(-2px);
-    }
-
-    .skills-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 2rem;
-    }
-
-    .skill-category {
-        background: linear-gradient(135deg, rgba(100, 150, 255, 0.06) 0%, rgba(150, 100, 255, 0.04) 100%);
-        border: 1px solid rgba(100, 150, 255, 0.15);
-        border-radius: 12px;
-        padding: 2rem;
-        transition: all 0.3s ease;
-    }
-
-    .skill-category:hover {
-        background: linear-gradient(135deg, rgba(100, 150, 255, 0.1) 0%, rgba(150, 100, 255, 0.06) 100%);
-        border-color: rgba(100, 150, 255, 0.3);
-        transform: translateY(-2px);
-    }
-
-    .skill-category h4 {
-        font-size: 1rem;
-        color: #a8c5ff;
-        margin-bottom: 1rem;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-        font-weight: 600;
-    }
-
-    .skill-category ul {
-        list-style: none;
-    }
-
-    .skill-category li {
-        color: #a1a1aa;
-        padding: 0.4rem 0;
-        font-size: 0.95rem;
-    }
-
-    .awards-grid {
+    /* Card System */
+    .grid {
         display: grid;
         gap: 1.5rem;
     }
 
-    .award-item {
-        padding: 2rem;
-        background: linear-gradient(135deg, rgba(100, 150, 255, 0.08) 0%, rgba(150, 100, 255, 0.05) 100%);
-        border: 1px solid rgba(100, 150, 255, 0.2);
-        border-left: 4px solid rgba(100, 150, 255, 0.6);
+    .grid-2 { grid-template-columns: repeat(auto-fit, minmax(450px, 1fr)); }
+    .grid-3 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+
+    .card {
+        background: var(--card-bg);
+        border: 1px solid var(--card-border);
         border-radius: 12px;
-        transition: all 0.4s ease;
+        padding: 2rem;
+        transition: all 0.3s ease;
         position: relative;
         overflow: hidden;
+        /* Magic Glow Effect Setup */
     }
 
-    .award-item::before {
-        content: '';
+    .card:hover {
+        transform: translateY(-5px);
+        border-color: var(--card-hover-border);
+        box-shadow: 0 10px 40px -10px rgba(0,0,0,0.5);
+    }
+
+    /* Dynamic Glow Gradient Blob */
+    .card::before {
+        content: "";
         position: absolute;
-        top: 0;
-        left: 0;
-        width: 4px;
-        height: 100%;
-        background: linear-gradient(180deg, #6496ff, #9678ff);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-    }
-    
-    .award-item:hover {
-        background: linear-gradient(135deg, rgba(100, 150, 255, 0.12) 0%, rgba(150, 100, 255, 0.08) 100%);
-        border-left-color: rgba(100, 150, 255, 1);
-        transform: translateX(8px);
-        box-shadow: 0 8px 30px rgba(100, 150, 255, 0.2);
+        top: var(--y, 50%);
+        left: var(--x, 50%);
+        transform: translate(-50%, -50%);
+        width: 0;
+        height: 0;
+        background: radial-gradient(circle, rgba(59, 130, 246, 0.15), transparent 60%);
+        transition: width 0.5s ease, height 0.5s ease;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 0;
     }
 
-    .award-item:hover::before {
-        opacity: 1;
+    .card:hover::before {
+        width: 400px;
+        height: 400px;
     }
 
-    .award-item h4 {
-        font-size: 1.1rem;
-        color: #fff;
-        margin-bottom: 0.3rem;
-        font-weight: 600;
-    }
-
-    .award-item .year {
-        color: #71717a;
-        font-size: 0.9rem;
-    }
-
-    .activities-grid {
-        display: grid;
-        gap: 2rem;
-    }
-
-    .activity-card {
-        background: linear-gradient(135deg, rgba(100, 150, 255, 0.08) 0%, rgba(150, 100, 255, 0.05) 100%);
-        border: 1px solid rgba(100, 150, 255, 0.2);
-        border-radius: 16px;
-        padding: 2.5rem;
-        transition: all 0.4s ease;
+    .card-content {
         position: relative;
-        overflow: hidden;
+        z-index: 1;
     }
 
-    .activity-card::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
-        height: 3px;
-        background: linear-gradient(90deg, #6496ff, #9678ff);
-        opacity: 0;
-        transition: opacity 0.4s ease;
-    }
-    
-    .activity-card:hover {
-        background: linear-gradient(135deg, rgba(100, 150, 255, 0.12) 0%, rgba(150, 100, 255, 0.08) 100%);
-        border-color: rgba(100, 150, 255, 0.4);
-        transform: translateY(-4px);
-        box-shadow: 0 12px 40px rgba(100, 150, 255, 0.2);
-    }
-
-    .activity-card:hover::before {
-        opacity: 1;
-    }
-
-    .activity-card h3 {
-        font-size: 1.2rem;
-        color: #fff;
-        margin-bottom: 0.5rem;
-        font-weight: 600;
-    }
-
-    .activity-card .role {
-        color: #71717a;
-        font-size: 0.9rem;
+    .card-top {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
         margin-bottom: 1rem;
     }
 
-    .activity-card p {
-        color: #a1a1aa;
-        line-height: 1.7;
+    .card h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+        color: #fff;
     }
 
-    
+    .card-subtitle {
+        font-size: 0.9rem;
+        color: var(--primary);
+        font-family: var(--font-mono);
+        margin-bottom: 1rem;
+        display: block;
+    }
 
+    .card p {
+        color: var(--text-muted);
+        font-size: 0.95rem;
+        margin-bottom: 1.5rem;
+    }
+
+    .tags {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+
+    .tag {
+        font-size: 0.75rem;
+        padding: 0.3rem 0.8rem;
+        background: rgba(255, 255, 255, 0.05);
+        border: 1px solid rgba(255, 255, 255, 0.1);
+        border-radius: 20px;
+        color: #cbd5e1;
+        font-family: var(--font-mono);
+        transition: background 0.2s;
+    }
+
+    .tag:hover {
+        background: rgba(255, 255, 255, 0.1);
+        border-color: var(--highlight);
+        color: white;
+    }
+
+    /* Experience Timeline Style */
+    .timeline-container {
+        border-left: 2px solid var(--card-border);
+        padding-left: 2rem;
+        margin-left: 1rem;
+    }
+
+    .timeline-item {
+        position: relative;
+        margin-bottom: 3rem;
+    }
+
+    .timeline-dot {
+        position: absolute;
+        left: -2.6rem;
+        top: 0.5rem;
+        width: 1rem;
+        height: 1rem;
+        background: var(--bg-color);
+        border: 2px solid var(--primary);
+        border-radius: 50%;
+        box-shadow: 0 0 10px var(--primary);
+    }
+
+    .timeline-date {
+        font-family: var(--font-mono);
+        color: var(--text-muted);
+        font-size: 0.85rem;
+        margin-bottom: 0.5rem;
+    }
+
+    /* Skills Grid */
+    .skill-box {
+        background: linear-gradient(180deg, rgba(255,255,255,0.03) 0%, rgba(255,255,255,0) 100%);
+        border: 1px solid var(--card-border);
+        padding: 1.5rem;
+        border-radius: 12px;
+    }
+
+    .skill-box h4 {
+        color: var(--highlight);
+        margin-bottom: 1rem;
+        font-family: var(--font-mono);
+        font-size: 0.9rem;
+        text-transform: uppercase;
+    }
+
+    .skill-list {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 0.5rem;
+        list-style: none;
+    }
+
+    .skill-list li {
+        color: var(--text-muted);
+        font-size: 0.9rem;
+        display: flex;
+        align-items: center;
+    }
+    
+    .skill-list li::before {
+        content: "▹";
+        color: var(--primary);
+        margin-right: 8px;
+    }
+
+    /* Footer */
     footer {
         text-align: center;
-        padding: 3rem 5%;
-        color: #52525b;
+        padding: 4rem 0;
+        border-top: 1px solid var(--card-border);
+        color: var(--text-muted);
         font-size: 0.9rem;
-        border-top: 1px solid rgba(100, 150, 255, 0.1);
     }
 
-    .fade-in {
+    /* Animations */
+    .fade-up {
         opacity: 0;
-        transform: translateY(20px);
-        animation: fadeInUp 0.8s ease forwards;
+        transform: translateY(30px);
+        transition: opacity 0.8s ease, transform 0.8s ease;
     }
-
-    @keyframes fadeInUp {
-        to {
-            opacity: 1;
-            transform: translateY(0);
-        }
+    
+    .fade-up.visible {
+        opacity: 1;
+        transform: translateY(0);
     }
 
     @media (max-width: 768px) {
-        .hero h1 {
-            font-size: 2.5rem;
-        }
-        
-        .hero-subtitle {
-            font-size: 1.1rem;
-        }
-        
-        nav a {
-            margin-left: 1rem;
-            font-size: 0.85rem;
-        }
-        
-        section {
-            padding: 4rem 5%;
-        }
+        .hero h1 { font-size: 3rem; }
+        .grid-2 { grid-template-columns: 1fr; }
+        .hero-stats { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
+        nav { width: 90%; justify-content: space-around; padding: 1rem; }
+        nav a span { display: none; }
     }
 </style>
 </head>
 <body>
 
 <nav>
-    <h2>MITHIL SHAH</h2>
-    <div>
-        <a href="#home">Home</a>
-        <a href="#experience">Experience</a>
-        <a href="#research">Research</a>
-        <a href="#awards">Awards</a>
-        <a href="#activities">Activities</a>
-    </div>
+    <a href="#home" class="active">Home</a>
+    <a href="#experience">Experience</a>
+    <a href="#research">Research</a>
+    <a href="#skills">Skills</a>
+    <a href="#activities">Activities</a>
 </nav>
 
 <div class="hero" id="home">
     <canvas class="dna-canvas" id="dnaCanvas"></canvas>
-    <div class="hero-content fade-in">
-        <div class="hero-label">HI, MY NAME IS</div>
-        <h1>Mithil Shah</h1>
-        <div class="hero-subtitle">Researcher • Learner • Problem Solver</div>
-        <p class="hero-description">
-            I'm a sophomore at the Illinois Mathematics and Science Academy, working at the intersection of 
-            Biological Sciences, Artificial Intelligence, and Algorithm Development.
+    <div class="hero-content">
+        <div class="hero-label fade-up">IMSA '27 • RESEARCHER</div>
+        <h1 class="fade-up">Mithil Shah</h1>
+        <div class="typewriter fade-up">
+            I build <span id="typing-text"></span><span class="cursor"></span>
+        </div>
+        
+        <p class="hero-description fade-up">
+            Working at the intersection of Biological Sciences, Artificial Intelligence, and Algorithm Development to solve complex problems in healthcare and genomics.
         </p>
-        <div class="hero-links">
-            <a href="mailto:mshah3@imsa.edu">mshah3@imsa.edu</a>
-            <span style="color: #3f3f46;">•</span>
-            <a href="tel:6302973634">(630) 297-3634</a>
+
+        <div class="cta-buttons fade-up">
+            <a href="mailto:mshah3@imsa.edu" class="btn btn-primary">Contact Me</a>
+            <a href="#research" class="btn btn-secondary">View Research</a>
         </div>
-        <div class="hero-info">
-            <div><strong style="color: #a8c5ff;">Coursework:</strong> Calculus BC, AP Computer Science A, Honors Biology, Methods of Scientific Research, Chemistry, Physics, Spanish III</div>
-            <div><strong style="color: #a8c5ff;">Schools:</strong> Illinois Mathematics and Science Academy (4.00/4.00 Unweighted GPA) • Waubonsie Valley High School (4.71/5.00 Weighted GPA)</div>
-            <div><strong style="color: #a8c5ff;">Languages:</strong> English, Spanish, Gujarati, Hindi</div>
+
+        <div class="hero-stats fade-up">
+            <div class="stat-item">
+                <h4>4.00</h4>
+                <p>Unweighted GPA</p>
+            </div>
+            <div class="stat-item">
+                <h4>MIT & MGH</h4>
+                <p>Research Affiliations</p>
+            </div>
+            <div class="stat-item">
+                <h4>NeurIPS</h4>
+                <p>Workshop Acceptances</p>
+            </div>
         </div>
-    </div>
-    
-    <div class="scroll-down" onclick="document.getElementById('experience').scrollIntoView()">
-        <div class="scroll-down-arrow"></div>
     </div>
 </div>
 
 <section id="experience">
-    <h2 class="section-title">Experience</h2>
-    <div class="experience-grid">
-        <div class="experience-card fade-in">
-            <h3>Researcher at Massachusetts General Hospital / Harvard University</h3>
-            <div class="year">2025 – Present</div>
-            <p>Working under Dr. Das and Dr. Li to model how APOE e4 alters glial responses to Alzheimer's pathology using genotype-specific spatial graphs and GNN/ODE models to predict cognitive decline.</p>
-            <div class="skills-tags">
-                <span class="skill-tag">Graph Neural Networks</span>
-                <span class="skill-tag">PyTorch</span>
-                <span class="skill-tag">Spatial Analysis</span>
-                <span class="skill-tag">ODE Models</span>
-                <span class="skill-tag">Neuroscience</span>
+    <div class="section-header fade-up">
+        <h2>Experience</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="timeline-container">
+        <div class="timeline-item fade-up card js-tilt">
+            <div class="timeline-dot"></div>
+            <div class="card-content">
+                <div class="timeline-date">2025 – Present</div>
+                <h3>Researcher</h3>
+                <span class="card-subtitle">Massachusetts General Hospital / Harvard University</span>
+                <p>Working under Dr. Das and Dr. Li to model how APOE e4 alters glial responses to Alzheimer's pathology. Utilizing genotype-specific spatial graphs and GNN/ODE models to predict cognitive decline trajectories.</p>
+                <div class="tags">
+                    <span class="tag">Graph Neural Networks</span>
+                    <span class="tag">Spatial Analysis</span>
+                    <span class="tag">ODE Models</span>
+                </div>
             </div>
         </div>
-        
-        <div class="experience-card fade-in">
-            <h3>Researcher at Massachusetts Institute of Technology (MIT)</h3>
-            <div class="year">2025 – Present</div>
-            <p>Working under Dr. Kellis and Dr. Schubert to build a dynamic graph neural network modeling blood–brain molecular communication in Parkinson's disease.</p>
-            <div class="skills-tags">
-                <span class="skill-tag">Dynamic GNN</span>
-                <span class="skill-tag">TensorFlow</span>
-                <span class="skill-tag">Molecular Biology</span>
-                <span class="skill-tag">Systems Biology</span>
-                <span class="skill-tag">Python</span>
+
+        <div class="timeline-item fade-up card js-tilt">
+            <div class="timeline-dot"></div>
+            <div class="card-content">
+                <div class="timeline-date">2025 – Present</div>
+                <h3>Researcher</h3>
+                <span class="card-subtitle">Massachusetts Institute of Technology (MIT)</span>
+                <p>Working under Dr. Kellis and Dr. Schubert to build a dynamic graph neural network modeling blood–brain molecular communication. Focused on systems biology approaches to Parkinson's disease.</p>
+                <div class="tags">
+                    <span class="tag">Dynamic GNN</span>
+                    <span class="tag">TensorFlow</span>
+                    <span class="tag">Systems Biology</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <section id="research">
-    <h2 class="section-title">Research</h2>
-    <div class="research-grid">
-        <div class="research-card fade-in">
-            <h3>Un-Distillable LLMs via Entropy-Perturbed Logits</h3>
-            <div class="year">2025</div>
-            <p>Developed a framework to create provably un-distillable LLMs by applying entropy-based noise to output logits. This approach prevents student models from replicating teacher outputs, establishing theoretical limits on knowledge distillation.</p>
-            <div class="skills-tags">
-                <span class="skill-tag">PyTorch</span>
-                <span class="skill-tag">Deep Learning</span>
-                <span class="skill-tag">Information Theory</span>
-                <span class="skill-tag">Model Security</span>
-                <span class="skill-tag">Python</span>
+    <div class="section-header fade-up">
+        <h2>Research & Projects</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="grid grid-2">
+        <div class="card fade-up js-tilt">
+            <div class="card-content">
+                <div class="card-top">
+                    <h3>Un-Distillable LLMs</h3>
+                    <a href="#" style="color:var(--text-muted)">↗</a>
+                </div>
+                <span class="card-subtitle">NeurIPS 2025 Workshop (Lock-LLM)</span>
+                <p>Developed a framework to create provably un-distillable LLMs by applying entropy-based noise to output logits. This establishes theoretical limits on knowledge distillation for model security.</p>
+                <div class="tags">
+                    <span class="tag">PyTorch</span>
+                    <span class="tag">Info Theory</span>
+                    <span class="tag">Security</span>
+                </div>
             </div>
         </div>
-        
-        <div class="research-card fade-in">
-            <h3>Hyperbolic Few-Shot Learning for Taxonomic Plant Classification</h3>
-            <div class="year">2025</div>
-            <p>Developed a self-supervised learning framework to pre-train vision models on large-scale, unlabeled datasets to learn robust, in-domain visual representations directly from raw images. Leveraged hyperbolic geometry to better capture hierarchical taxonomic relationships in plant classification.</p>
-            <div class="skills-tags">
-                <span class="skill-tag">Computer Vision</span>
-                <span class="skill-tag">TensorFlow</span>
-                <span class="skill-tag">Self-Supervised Learning</span>
-                <span class="skill-tag">Hyperbolic Geometry</span>
-                <span class="skill-tag">Taxonomy</span>
+
+        <div class="card fade-up js-tilt">
+            <div class="card-content">
+                <div class="card-top">
+                    <h3>Hyperbolic Few-Shot Learning</h3>
+                    <a href="#" style="color:var(--text-muted)">↗</a>
+                </div>
+                <span class="card-subtitle">NeurIPS 2025 Workshop (Imageomics)</span>
+                <p>A self-supervised learning framework pre-training vision models on large-scale datasets. Leveraged hyperbolic geometry to capture hierarchical taxonomic relationships in plant classification.</p>
+                <div class="tags">
+                    <span class="tag">Computer Vision</span>
+                    <span class="tag">Hyperbolic Geometry</span>
+                    <span class="tag">Taxonomy</span>
+                </div>
             </div>
         </div>
     </div>
 </section>
 
 <section id="skills">
-    <h2 class="section-title">Skills & Expertise</h2>
-    <div class="skills-grid">
-        <div class="skill-category fade-in">
-            <h4>Programming</h4>
-            <ul>
+    <div class="section-header fade-up">
+        <h2>Technical Arsenal</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="grid grid-3">
+        <div class="skill-box fade-up">
+            <h4>Languages</h4>
+            <ul class="skill-list">
                 <li>Python</li>
                 <li>Java</li>
                 <li>MATLAB</li>
+                <li>LaTeX</li>
+                <li>SQL</li>
             </ul>
         </div>
-        
-        <div class="skill-category fade-in">
-            <h4>Tools & Frameworks</h4>
-            <ul>
-                <li>TensorFlow</li>
+        <div class="skill-box fade-up">
+            <h4>AI & ML</h4>
+            <ul class="skill-list">
                 <li>PyTorch</li>
+                <li>TensorFlow</li>
                 <li>Scikit-learn</li>
+                <li>GNNs</li>
+                <li>Transformers</li>
+            </ul>
+        </div>
+        <div class="skill-box fade-up">
+            <h4>Bio-Informatics</h4>
+            <ul class="skill-list">
                 <li>AlphaFold</li>
                 <li>Scanpy</li>
                 <li>Biopython</li>
-                <li>LaTeX</li>
-            </ul>
-        </div>
-        
-        <div class="skill-category fade-in">
-            <h4>Certifications / Courses</h4>
-            <ul>
-                <li>Deep Learning Onramp (MATLAB)</li>
-                <li>Honors Chemistry (Northwestern CTD)</li>
-                <li>Calculus (Russian School of Mathematics)</li>
+                <li>Genomics</li>
             </ul>
         </div>
     </div>
 </section>
 
-<section id="awards">
-    <h2 class="section-title">Awards & Recognition</h2>
-    <div class="awards-grid">
-        <div class="award-item fade-in">
-            <h4>Accepted to NeurIPS 2025 Workshop on Lock-LLM</h4>
-            <div class="year">2025</div>
+<section id="awards" style="background: rgba(255,255,255,0.01);">
+    <div class="section-header fade-up">
+        <h2>Awards</h2>
+        <div class="line"></div>
+    </div>
+    
+    <div class="grid grid-3">
+        <div class="card fade-up">
+            <div class="card-content">
+                <span class="tag" style="border-color: var(--accent); color: var(--accent);">2025</span>
+                <h3 style="margin-top:1rem; font-size:1.1rem;">NeurIPS Workshop Acceptance</h3>
+                <p style="margin-bottom:0; font-size:0.9rem;">Lock-LLM & Imageomics</p>
+            </div>
         </div>
-        
-        <div class="award-item fade-in">
-            <h4>Accepted to NeurIPS 2025 Workshop on Imageomics</h4>
-            <div class="year">2025</div>
+        <div class="card fade-up">
+            <div class="card-content">
+                <span class="tag" style="border-color: var(--accent); color: var(--accent);">2025</span>
+                <h3 style="margin-top:1rem; font-size:1.1rem;">AIME Qualifier</h3>
+                <p style="margin-bottom:0; font-size:0.9rem;">American Invitational Mathematics Exam</p>
+            </div>
         </div>
-        
-        <div class="award-item fade-in">
-            <h4>AIME Qualifier</h4>
-            <div class="year">2025</div>
+        <div class="card fade-up">
+            <div class="card-content">
+                <span class="tag" style="border-color: var(--accent); color: var(--accent);">2021-25</span>
+                <h3 style="margin-top:1rem; font-size:1.1rem;">VEX Robotics Worlds</h3>
+                <p style="margin-bottom:0; font-size:0.9rem;">Two-time World Championship Qualifier</p>
+            </div>
         </div>
     </div>
 </section>
 
 <section id="activities">
-    <h2 class="section-title">Activities & Leadership</h2>
-    <div class="activities-grid">
-        <div class="activity-card fade-in">
-            <h3>Council for Campus Equity</h3>
-            <div class="role">Sophomore Board • 2025 – Present</div>
-            <p>Organized awareness campaigns and facilitated student discussions addressing diversity, equity, and inclusion within the campus community.</p>
+    <div class="section-header fade-up">
+        <h2>Leadership</h2>
+        <div class="line"></div>
+    </div>
+
+    <div class="grid grid-2">
+        <div class="card fade-up js-tilt">
+            <div class="card-content">
+                <h3>Council for Campus Equity</h3>
+                <span class="card-subtitle">Sophomore Board</span>
+                <p>Organizing awareness campaigns and facilitating discussions on diversity, equity, and inclusion at IMSA.</p>
+            </div>
         </div>
-        
-        <div class="activity-card fade-in">
-            <h3>Medical Society</h3>
-            <div class="role">Mentorship Committee • 2025 – Present</div>
-            <p>Facilitate student-mentor communication and ensure everything runs smoothly and dynamically.</p>
+        <div class="card fade-up js-tilt">
+            <div class="card-content">
+                <h3>Medical Society</h3>
+                <span class="card-subtitle">Mentorship Committee</span>
+                <p>Facilitating student-mentor communication and dynamic operational management.</p>
+            </div>
         </div>
-        
-        <div class="activity-card fade-in">
-            <h3>Science Olympiad</h3>
-            <div class="role">2021 – Present</div>
-            <p>Compete in Designer Genes, Engineering CAD, and Robot Tour; apply principles of molecular biology, design engineering, and robotics.</p>
-        </div>
-        
-        <div class="activity-card fade-in">
-            <h3>VEX V5 Robotics</h3>
-            <div class="role">2021 – Present</div>
-            <p>Designed the full bot using CAD; built mechanisms ensuring structural stability. Two-time Worlds Qualifier.</p>
-        </div>
-        
-        <div class="activity-card fade-in">
-            <h3>Math Team</h3>
-            <div class="role">2022 – Present</div>
-            <p>Work individually and collaboratively for answering a multitude of levels and types of math questions.</p>
+        <div class="card fade-up js-tilt">
+            <div class="card-content">
+                <h3>Science Olympiad</h3>
+                <span class="card-subtitle">Competitor</span>
+                <p>Designer Genes, Engineering CAD, and Robot Tour. Applying molecular biology and engineering principles.</p>
+            </div>
         </div>
     </div>
 </section>
 
-
 <footer>
-    © 2025 Mithil Shah — All Rights Reserved
+    <p>© 2025 Mithil Shah. Built with Biology & Code.</p>
 </footer>
 
 <script>
-const canvas = document.getElementById('dnaCanvas');
-const ctx = canvas.getContext('2d');
+    // --- 1. Typewriter Effect ---
+    const phrases = ["Graph Neural Networks", "Bio-Informatics Models", "Secure AI Systems", "Future Therapeutics"];
+    let currentPhrase = 0;
+    let isDeleting = false;
+    let text = "";
+    const typingSpeed = 100;
+    const deletingSpeed = 50;
+    const pauseTime = 2000;
 
-function resizeCanvas() {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-}
-resizeCanvas();
-window.addEventListener('resize', resizeCanvas);
-
-// --- DNA 3D Illusion Logic ---
-class HelixPoint {
-    constructor(y, offset, side) {
-        this.y = y;
-        this.offset = offset;
-        this.side = side; // 0 for front, 1 for back (based on sin value)
-    }
-
-    getZ(amplitude) {
-        // Z-coordinate for perspective effect (depth)
-        return Math.cos(this.offset) * amplitude;
-    }
-
-    getX(centerX, amplitude) {
-        // X-coordinate for revolution effect
-        return centerX + Math.sin(this.offset) * amplitude;
-    }
-
-    getScale(z, maxZ) {
-        // Scale for perspective: points further back are smaller
-        const normalizedZ = (z + maxZ) / (2 * maxZ);
-        // Scale will be between 0.7 (furthest back) and 1.0 (furthest front)
-        return 0.7 + 0.3 * normalizedZ; 
-    }
-}
-
-class DNAStrand {
-    constructor() {
-        this.points = [];
-        this.time = 0;
-        this.amplitude = 130; // SLIGHTLY INCREASED amplitude for wider spiral
-        this.frequency = 0.05; 
-        this.speed = 0.025; // SLIGHTLY INCREASED speed for faster rotation
-        this.spacing = 35; 
-        this.maxZ = this.amplitude;
-    }
-
-    update() {
-        this.time += this.speed;
-        this.points = [];
-        const numPoints = Math.ceil(canvas.height / this.spacing) + 2;
+    function type() {
+        const fullPhrase = phrases[currentPhrase];
         
-        // Center X coordinate of the helix, slightly offset to the right
-        const centerX = canvas.width * 0.7; 
-
-        for (let i = -1; i < numPoints - 1; i++) {
-            const y = i * this.spacing;
-            const offset = this.time + i * this.frequency;
-            
-            // Strand 1: Phase 0
-            this.points.push(new HelixPoint(y, offset, 0));
-
-            // Strand 2: Phase PI (opposite side of the helix)
-            this.points.push(new HelixPoint(y, offset + Math.PI, 1));
+        if (isDeleting) {
+            text = fullPhrase.substring(0, text.length - 1);
+        } else {
+            text = fullPhrase.substring(0, text.length + 1);
         }
 
-        // Sort points by Z-depth to correctly draw segments from back to front
-        this.points.sort((a, b) => a.getZ(this.amplitude) - b.getZ(this.amplitude));
+        document.getElementById('typing-text').innerHTML = text;
+
+        let delta = isDeleting ? deletingSpeed : typingSpeed;
+
+        if (!isDeleting && text === fullPhrase) {
+            delta = pauseTime;
+            isDeleting = true;
+        } else if (isDeleting && text === "") {
+            isDeleting = false;
+            currentPhrase = (currentPhrase + 1) % phrases.length;
+            delta = 500;
+        }
+
+        setTimeout(type, delta);
     }
-
-    drawHelixSegment(p1, p2, thickness, isBackbone) {
-        const centerX = canvas.width * 0.7;
-        
-        // Calculate P1 position with perspective
-        const z1 = p1.getZ(this.amplitude);
-        const scale1 = p1.getScale(z1, this.maxZ);
-        const x1 = p1.getX(centerX, this.amplitude);
-        const projectedX1 = x1 * scale1 + centerX * (1 - scale1);
-
-        // Calculate P2 position with perspective
-        const z2 = p2.getZ(this.amplitude);
-        const scale2 = p2.getScale(z2, this.maxZ);
-        const x2 = p2.getX(centerX, this.amplitude);
-        const projectedX2 = x2 * scale2 + centerX * (1 - scale2);
+    document.addEventListener('DOMContentLoaded', type);
 
 
-        // --- Draw the Line Segment (Backbone or Base Pair) ---
-        let color;
-        if (isBackbone) {
-            color = 'rgba(100, 150, 255, 0.9)';
-            ctx.lineWidth = thickness * scale1;
-        } else { // Base Pair
-            // Assign base colors based on vertical position
-            const baseIndex = Math.floor(p1.y / this.spacing) % 4;
-            switch (baseIndex) {
-                case 0: color = 'rgba(255, 100, 100, 0.8)'; break; // Red
-                case 1: color = 'rgba(100, 255, 100, 0.8)'; break; // Green
-                case 2: color = 'rgba(100, 100, 255, 0.8)'; break; // Blue
-                case 3: color = 'rgba(255, 255, 100, 0.8)'; break; // Yellow
-            }
-            ctx.lineWidth = thickness * 0.7 * scale1;
-        }
-        
-        ctx.strokeStyle = color;
-        ctx.beginPath();
-        ctx.moveTo(projectedX1, p1.y);
-        ctx.lineTo(projectedX2, p2.y);
-        ctx.stroke();
-
-        // --- Draw the Nucleobase Point (Dot) on P1 ---
-        if (isBackbone) {
-            const pointRadius = 4;
-            // Draw a subtle glow/shadow
-            ctx.shadowBlur = 8 * scale1;
-            ctx.shadowColor = 'rgba(100, 150, 255, 0.9)';
-            
-            ctx.fillStyle = 'white'; 
-            ctx.beginPath();
-            ctx.arc(projectedX1, p1.y, pointRadius * scale1, 0, Math.PI * 2);
-            ctx.fill();
-            ctx.shadowBlur = 0;
-        }
-    }
-
-    draw() {
-        const backboneThickness = 4;
-        const centerX = canvas.width * 0.7;
-
-        // Iterate through the points sorted by Z-depth
-        for (const p1 of this.points) {
-            
-            // 1. Draw Backbone Segment (to the point one spacing below on the same side)
-            const nextY = p1.y + this.spacing;
-            const nextP = this.points.find(p => p.y === nextY && p.side === p1.side);
-            if (nextP) {
-                this.drawHelixSegment(p1, nextP, backboneThickness, true);
-            }
-
-            // 2. Draw Base Pair (to the point at the same Y but on the opposite side)
-            const pairedOffset = p1.offset + Math.PI;
-            // Find the paired point at the same Y level AND the opposite phase
-            const p2 = this.points.find(p => p.y === p1.y && Math.abs(p.offset - pairedOffset) % (2 * Math.PI) < 0.01);
-            
-            if (p2 && p1.side === 0) { // Only draw the connection if p1 is the 'first' side
-                 this.drawHelixSegment(p1, p2, backboneThickness, false); 
-            }
-            
-            // Ensures single end points also get their nucleobase dot
-            if (!nextP) {
-                // Find point's projected coordinates just to draw the dot
-                const z1 = p1.getZ(this.amplitude);
-                const scale1 = p1.getScale(z1, this.maxZ);
-                const x1 = p1.getX(centerX, this.amplitude);
-                const projectedX1 = x1 * scale1 + centerX * (1 - scale1);
-                
-                const pointRadius = 4;
-                ctx.shadowBlur = 8 * scale1;
-                ctx.shadowColor = 'rgba(100, 150, 255, 0.9)';
-                ctx.fillStyle = 'white';
-                ctx.beginPath();
-                ctx.arc(projectedX1, p1.y, pointRadius * scale1, 0, Math.PI * 2);
-                ctx.fill();
-                ctx.shadowBlur = 0;
-            }
-        }
-    }
-}
-
-const dna = new DNAStrand();
-
-function animate() {
-    // Semi-transparent background clear for a trailing effect
-    ctx.fillStyle = 'rgba(10, 14, 26, 0.1)'; 
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    // --- 2. Dynamic DNA Background (Improved) ---
+    const canvas = document.getElementById('dnaCanvas');
+    const ctx = canvas.getContext('2d');
     
-    dna.update();
-    dna.draw();
+    let width, height;
+    let mouseX = 0;
+    let mouseY = 0;
+
+    function resize() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+    }
+    window.addEventListener('resize', resize);
+    resize();
     
-    requestAnimationFrame(animate);
-}
-
-// Start the animation loop
-animate();
-
-// Intersection Observer for fade-in animations
-const observerOptions = {
-    threshold: 0.1,
-    rootMargin: '0px 0px -50px 0px'
-};
-
-const observer = new IntersectionObserver((entries) => {
-    entries.forEach((entry, index) => {
-        if (entry.isIntersecting) {
-            setTimeout(() => {
-                entry.target.style.opacity = '1';
-                entry.target.style.transform = 'translateY(0)';
-            }, index * 100);
-            observer.unobserve(entry.target);
-        }
+    document.addEventListener('mousemove', (e) => {
+        mouseX = e.clientX;
+        mouseY = e.clientY;
     });
-}, observerOptions);
 
-document.querySelectorAll('.fade-in').forEach(el => {
-    observer.observe(el);
-});
+    class Particle {
+        constructor(x, y, type) {
+            this.x = x;
+            this.y = y;
+            this.baseY = y;
+            this.type = type; // 0 = blue, 1 = purple
+            this.offset = Math.random() * 100;
+            this.speed = 0.02 + Math.random() * 0.02;
+        }
+
+        update(time) {
+            // DNA Sine Wave Motion
+            this.x += Math.sin(time * this.speed + this.offset) * 0.5;
+            
+            // Mouse Interaction (repel slightly)
+            const dx = this.x - mouseX;
+            const dy = this.y - mouseY;
+            const dist = Math.sqrt(dx*dx + dy*dy);
+            if(dist < 200) {
+                const force = (200 - dist) / 200;
+                this.x += dx * force * 0.05;
+                this.y += dy * force * 0.05;
+            } else {
+                // Return to base Y slowly
+                this.y += (this.baseY - this.y) * 0.05;
+            }
+        }
+
+        draw() {
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, Math.random() * 2 + 1, 0, Math.PI * 2);
+            ctx.fillStyle = this.type === 0 ? 'rgba(59, 130, 246, 0.5)' : 'rgba(139, 92, 246, 0.5)';
+            ctx.fill();
+        }
+    }
+
+    const particles = [];
+    const strandCount = 40;
+    
+    // Create dual helix structure
+    for(let i=0; i<strandCount; i++) {
+        // Strand 1
+        particles.push(new Particle(window.innerWidth/2, i * 30, 0));
+        // Strand 2
+        particles.push(new Particle(window.innerWidth/2, i * 30, 1));
+    }
+
+    let time = 0;
+    function animate() {
+        // Clear with fade for trail effect
+        ctx.fillStyle = 'rgba(5, 5, 10, 0.2)'; 
+        ctx.fillRect(0, 0, width, height);
+
+        time += 0.05;
+
+        // Draw connecting lines first
+        ctx.lineWidth = 1;
+        for(let i = 0; i < particles.length; i+=2) {
+            const p1 = particles[i];
+            const p2 = particles[i+1];
+            
+            // Calculate Helix positions
+            const yOffset = i * 15;
+            const amplitude = 150;
+            
+            p1.x = width/2 + Math.sin(time + i * 0.1) * amplitude;
+            p2.x = width/2 + Math.sin(time + i * 0.1 + Math.PI) * amplitude;
+            
+            p1.update(time);
+            p2.update(time);
+            
+            p1.draw();
+            p2.draw();
+
+            // Draw rung
+            if (i % 4 === 0) {
+                ctx.beginPath();
+                ctx.moveTo(p1.x, p1.y);
+                ctx.lineTo(p2.x, p2.y);
+                ctx.strokeStyle = 'rgba(255, 255, 255, 0.05)';
+                ctx.stroke();
+            }
+        }
+        requestAnimationFrame(animate);
+    }
+    animate();
+
+
+    // --- 3. Scroll & Tilt Interactions ---
+    
+    // Intersection Observer for scroll fade-in
+    const observer = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                entry.target.classList.add('visible');
+            }
+        });
+    }, { threshold: 0.1 });
+
+    document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+    // Card Hover Tilt & Glow Effect
+    document.querySelectorAll('.js-tilt').forEach(card => {
+        card.addEventListener('mousemove', (e) => {
+            const rect = card.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const y = e.clientY - rect.top;
+            
+            // Set CSS variables for the glow
+            card.style.setProperty('--x', `${x}px`);
+            card.style.setProperty('--y', `${y}px`);
+        });
+    });
+
 </script>
-
 </body>
 </html>

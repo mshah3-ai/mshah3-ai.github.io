@@ -199,6 +199,7 @@
         50% { transform: translateX(-50%) translateY(-10px); }
     }
 
+    /* Updated CSS for the DNA canvas */
     .dna-canvas {
         position: absolute;
         top: 0;
@@ -451,7 +452,7 @@
         line-height: 1.7;
     }
 
-   
+    
 
     footer {
         text-align: center;
@@ -703,123 +704,185 @@ function resizeCanvas() {
 resizeCanvas();
 window.addEventListener('resize', resizeCanvas);
 
+// --- DNA 3D Illusion Logic ---
+class HelixPoint {
+    constructor(y, offset, side) {
+        this.y = y;
+        this.offset = offset;
+        this.side = side; // 0 for front, 1 for back (based on sin value)
+    }
+
+    getZ(amplitude) {
+        // Z-coordinate for perspective effect (depth)
+        // Uses Math.cos for depth calculation relative to the sine wave's phase
+        return Math.cos(this.offset) * amplitude;
+    }
+
+    getX(centerX, amplitude) {
+        // X-coordinate for revolution effect
+        return centerX + Math.sin(this.offset) * amplitude;
+    }
+
+    getScale(z, maxZ) {
+        // Scale for perspective: points further back are smaller
+        // Adjust 0.5 for effect intensity: 1 - 0.5 * (z/maxZ)
+        // Note: z is between -maxZ and +maxZ. We normalize to 0-2 range then scale.
+        const normalizedZ = (z + maxZ) / (2 * maxZ);
+        return 0.7 + 0.3 * normalizedZ; // Scale will be between 0.7 (furthest back) and 1.0 (furthest front)
+    }
+}
+
 class DNAStrand {
     constructor() {
-        this.points1 = [];
-        this.points2 = [];
-        this.connections = [];
+        this.points = [];
         this.time = 0;
-        this.amplitude = 80;
-        this.frequency = 0.02;
-        this.speed = 0.01;
-        this.spacing = 30;
-        this.numPoints = Math.ceil(canvas.height / this.spacing);
+        this.amplitude = 120; // Increased amplitude for more width
+        this.frequency = 0.05; // Tighter helix turns
+        this.speed = 0.02;
+        this.spacing = 35; // Vertical spacing between base pairs
+        this.maxZ = this.amplitude;
     }
 
     update() {
         this.time += this.speed;
-        this.points1 = [];
-        this.points2 = [];
-        this.connections = [];
+        this.points = [];
+        const numPoints = Math.ceil(canvas.height / this.spacing) + 2;
+        
+        // Center X coordinate of the helix, slightly offset to the right
+        const centerX = canvas.width * 0.7; 
 
-        for (let i = 0; i < this.numPoints; i++) {
+        for (let i = -1; i < numPoints - 1; i++) {
             const y = i * this.spacing;
             const offset = this.time + i * this.frequency;
             
-            const x1 = canvas.width * 0.7 + Math.sin(offset) * this.amplitude;
-            const x2 = canvas.width * 0.7 + Math.sin(offset + Math.PI) * this.amplitude;
-            
-            this.points1.push({ x: x1, y });
-            this.points2.push({ x: x2, y });
-            
-            if (i % 3 === 0) {
-                const baseType = Math.floor(i / 3) % 4;
-                this.connections.push({ x1, x2, y, baseType });
+            // Strand 1: Phase 0
+            this.points.push(new HelixPoint(y, offset, 0));
+
+            // Strand 2: Phase PI (opposite side of the helix)
+            this.points.push(new HelixPoint(y, offset + Math.PI, 1));
+        }
+
+        // Sort points by Z-depth to correctly draw segments from back to front
+        this.points.sort((a, b) => a.getZ(this.amplitude) - b.getZ(this.amplitude));
+    }
+
+    drawHelixSegment(p1, p2, thickness, isBackbone) {
+        const centerX = canvas.width * 0.7;
+        
+        // Calculate P1 position with perspective
+        const z1 = p1.getZ(this.amplitude);
+        const scale1 = p1.getScale(z1, this.maxZ);
+        const x1 = p1.getX(centerX, this.amplitude);
+        const projectedX1 = x1 * scale1 + centerX * (1 - scale1);
+
+        // Calculate P2 position with perspective
+        const z2 = p2.getZ(this.amplitude);
+        const scale2 = p2.getScale(z2, this.maxZ);
+        const x2 = p2.getX(centerX, this.amplitude);
+        const projectedX2 = x2 * scale2 + centerX * (1 - scale2);
+
+
+        // --- Draw the Line Segment (Backbone or Base Pair) ---
+        let color;
+        if (isBackbone) {
+            color = 'rgba(100, 150, 255, 0.9)';
+            ctx.lineWidth = thickness * scale1;
+        } else { // Base Pair
+            // Assign base colors based on vertical position
+            const baseIndex = Math.floor(p1.y / this.spacing) % 4;
+            switch (baseIndex) {
+                case 0: color = 'rgba(255, 100, 100, 0.8)'; break; // Red
+                case 1: color = 'rgba(100, 255, 100, 0.8)'; break; // Green
+                case 2: color = 'rgba(100, 100, 255, 0.8)'; break; // Blue
+                case 3: color = 'rgba(255, 255, 100, 0.8)'; break; // Yellow
             }
+            ctx.lineWidth = thickness * 0.7 * scale1;
+        }
+        
+        ctx.strokeStyle = color;
+        ctx.beginPath();
+        ctx.moveTo(projectedX1, p1.y);
+        ctx.lineTo(projectedX2, p2.y);
+        ctx.stroke();
+
+        // --- Draw the Nucleobase Point (Dot) on P1 ---
+        // We only draw the point once per segment, on p1
+        if (isBackbone) {
+            const pointRadius = 4;
+            // Draw a subtle glow/shadow
+            ctx.shadowBlur = 8 * scale1;
+            ctx.shadowColor = 'rgba(100, 150, 255, 0.9)';
+            
+            ctx.fillStyle = 'white'; // White dot for better visibility/glow
+            ctx.beginPath();
+            ctx.arc(projectedX1, p1.y, pointRadius * scale1, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.shadowBlur = 0;
         }
     }
 
     draw() {
-        const gradient1 = ctx.createLinearGradient(0, 0, 0, canvas.height);
-        gradient1.addColorStop(0, 'rgba(100, 150, 255, 0.7)');
-        gradient1.addColorStop(0.3, 'rgba(120, 180, 255, 0.9)');
-        gradient1.addColorStop(0.7, 'rgba(150, 120, 255, 0.9)');
-        gradient1.addColorStop(1, 'rgba(200, 130, 255, 0.7)');
-        
-        ctx.strokeStyle = gradient1;
-        ctx.lineWidth = 3;
-        
-        ctx.beginPath();
-        this.points1.forEach((point, i) => {
-            if (i === 0) ctx.moveTo(point.x, point.y);
-            else ctx.lineTo(point.x, point.y);
-        });
-        ctx.stroke();
-        
-        ctx.beginPath();
-        this.points2.forEach((point, i) => {
-            if (i === 0) ctx.moveTo(point.x, point.y);
-            else ctx.lineTo(point.x, point.y);
-        });
-        ctx.stroke();
-        
-        ctx.lineWidth = 2.5;
-        this.connections.forEach(conn => {
-            let color;
-            switch(conn.baseType) {
-                case 0:
-                    color = 'rgba(100, 180, 255, 0.7)';
-                    break;
-                case 1:
-                    color = 'rgba(100, 220, 255, 0.7)';
-                    break;
-                case 2:
-                    color = 'rgba(150, 120, 255, 0.7)';
-                    break;
-                case 3:
-                    color = 'rgba(200, 130, 255, 0.7)';
-                    break;
+        const backboneThickness = 4;
+        const centerX = canvas.width * 0.7;
+
+        // Iterate through the points sorted by Z-depth
+        for (const p1 of this.points) {
+            
+            // 1. Draw Backbone Segment (to the point one spacing below on the same side)
+            const nextY = p1.y + this.spacing;
+            const nextP = this.points.find(p => p.y === nextY && p.side === p1.side);
+            if (nextP) {
+                this.drawHelixSegment(p1, nextP, backboneThickness, true);
             }
-            ctx.strokeStyle = color;
-            ctx.beginPath();
-            ctx.moveTo(conn.x1, conn.y);
-            ctx.lineTo(conn.x2, conn.y);
-            ctx.stroke();
-        });
-        
-        ctx.shadowBlur = 12;
-        ctx.shadowColor = 'rgba(100, 150, 255, 0.9)';
-        
-        const gradient2 = ctx.createRadialGradient(0, 0, 0, 0, 0, 5);
-        gradient2.addColorStop(0, 'rgba(200, 220, 255, 1)');
-        gradient2.addColorStop(1, 'rgba(100, 150, 255, 0.8)');
-        ctx.fillStyle = gradient2;
-        
-        this.points1.forEach(point => {
-            ctx.beginPath();
-            ctx.arc(point.x, point.y, 3.5, 0, Math.PI * 2);
-            ctx.fill();
-        });
-        this.points2.forEach(point => {
-            ctx.beginPath();
-            ctx.arc(point.x, point.y, 3.5, 0, Math.PI * 2);
-            ctx.fill();
-        });
-        ctx.shadowBlur = 0;
+
+            // 2. Draw Base Pair (to the point at the same Y but on the opposite side)
+            // We only need to draw the base pair once for each vertical level (e.g., from side 0 to side 1)
+            const pairedOffset = p1.offset + Math.PI;
+            // Find the paired point at the same Y level AND the opposite phase
+            const p2 = this.points.find(p => p.y === p1.y && Math.abs(p.offset - pairedOffset) % (2 * Math.PI) < 0.01);
+            
+            if (p2 && p1.side === 0) { // Only draw the connection if p1 is the 'first' side
+                 this.drawHelixSegment(p1, p2, backboneThickness, false); 
+            }
+            
+            // Ensures single end points also get their nucleobase dot
+            if (!nextP) {
+                // Find point's projected coordinates just to draw the dot
+                const z1 = p1.getZ(this.amplitude);
+                const scale1 = p1.getScale(z1, this.maxZ);
+                const x1 = p1.getX(centerX, this.amplitude);
+                const projectedX1 = x1 * scale1 + centerX * (1 - scale1);
+                
+                const pointRadius = 4;
+                ctx.shadowBlur = 8 * scale1;
+                ctx.shadowColor = 'rgba(100, 150, 255, 0.9)';
+                ctx.fillStyle = 'white';
+                ctx.beginPath();
+                ctx.arc(projectedX1, p1.y, pointRadius * scale1, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.shadowBlur = 0;
+            }
+        }
     }
 }
 
 const dna = new DNAStrand();
 
 function animate() {
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    // Semi-transparent background clear for a trailing effect
+    ctx.fillStyle = 'rgba(10, 14, 26, 0.1)'; 
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    
     dna.update();
     dna.draw();
+    
     requestAnimationFrame(animate);
 }
 
+// Start the animation loop
 animate();
 
+// Intersection Observer for fade-in animations
 const observerOptions = {
     threshold: 0.1,
     rootMargin: '0px 0px -50px 0px'

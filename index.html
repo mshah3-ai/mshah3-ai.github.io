@@ -104,8 +104,9 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
-        padding: 0 5%;
+        /* Changed justifyContent to flex-start and added padding-top to fix overlap */
+        justify-content: flex-start; 
+        padding: 180px 5% 5rem; /* Significant top padding for navbar */
         position: relative;
         text-align: center;
     }
@@ -121,6 +122,7 @@
     .hero-content {
         z-index: 10;
         max-width: 900px;
+        margin: auto; /* Center vertically in remaining space */
     }
 
     .hero-label {
@@ -457,6 +459,7 @@
         .hero-stats { grid-template-columns: 1fr; gap: 1rem; text-align: left; }
         nav { width: 90%; justify-content: space-around; padding: 1rem; }
         nav a span { display: none; }
+        .hero { padding-top: 150px; } /* Adjust for mobile */
     }
 </style>
 </head>
@@ -647,7 +650,7 @@
         </div>
         <div class="card fade-up">
             <div class="card-content">
-                <span class="tag" style="border-color: var(--accent); color: var(--accent);">2021-25</span>
+                <span class="tag" style="border-color: var(--accent); color: var(--accent);">2022, 2024</span>
                 <h3 style="margin-top:1rem; font-size:1.1rem;">VEX Robotics Worlds</h3>
                 <p style="margin-bottom:0; font-size:0.9rem;">Two-time World Championship Qualifier</p>
             </div>
@@ -657,7 +660,7 @@
 
 <section id="activities">
     <div class="section-header fade-up">
-        <h2>Leadership</h2>
+        <h2>Leadership & Activities</h2>
         <div class="line"></div>
     </div>
 
@@ -665,21 +668,38 @@
         <div class="card fade-up js-tilt">
             <div class="card-content">
                 <h3>Council for Campus Equity</h3>
-                <span class="card-subtitle">Sophomore Board</span>
+                <span class="card-subtitle">Sophomore Board • 2025 – Present</span>
                 <p>Organizing awareness campaigns and facilitating discussions on diversity, equity, and inclusion at IMSA.</p>
             </div>
         </div>
         <div class="card fade-up js-tilt">
             <div class="card-content">
                 <h3>Medical Society</h3>
-                <span class="card-subtitle">Mentorship Committee</span>
+                <span class="card-subtitle">Mentorship Committee • 2025 – Present</span>
                 <p>Facilitating student-mentor communication and dynamic operational management.</p>
             </div>
         </div>
+        
+        <div class="card fade-up js-tilt">
+            <div class="card-content">
+                <h3>VEX V5 Robotics</h3>
+                <span class="card-subtitle">Design Lead • 2021 – Present</span>
+                <p>Designed the full bot using CAD; built mechanisms ensuring structural stability. Two-time World Championship Qualifier.</p>
+            </div>
+        </div>
+
+         <div class="card fade-up js-tilt">
+            <div class="card-content">
+                <h3>Math Team</h3>
+                <span class="card-subtitle">Competitor • 2022 – Present</span>
+                <p>Work individually and collaboratively for answering a multitude of levels and types of math questions.</p>
+            </div>
+        </div>
+
         <div class="card fade-up js-tilt">
             <div class="card-content">
                 <h3>Science Olympiad</h3>
-                <span class="card-subtitle">Competitor</span>
+                <span class="card-subtitle">Competitor • 2021 – Present</span>
                 <p>Designer Genes, Engineering CAD, and Robot Tour. Applying molecular biology and engineering principles.</p>
             </div>
         </div>

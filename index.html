@@ -199,7 +199,6 @@
         50% { transform: translateX(-50%) translateY(-10px); }
     }
 
-    /* Updated CSS for the DNA canvas */
     .dna-canvas {
         position: absolute;
         top: 0;
@@ -207,7 +206,8 @@
         width: 100%;
         height: 100%;
         z-index: 1;
-        opacity: 0.4;
+        /* Adjusted opacity for a slightly clearer view of the background helix */
+        opacity: 0.5; 
     }
 
     section {
@@ -714,7 +714,6 @@ class HelixPoint {
 
     getZ(amplitude) {
         // Z-coordinate for perspective effect (depth)
-        // Uses Math.cos for depth calculation relative to the sine wave's phase
         return Math.cos(this.offset) * amplitude;
     }
 
@@ -725,10 +724,9 @@ class HelixPoint {
 
     getScale(z, maxZ) {
         // Scale for perspective: points further back are smaller
-        // Adjust 0.5 for effect intensity: 1 - 0.5 * (z/maxZ)
-        // Note: z is between -maxZ and +maxZ. We normalize to 0-2 range then scale.
         const normalizedZ = (z + maxZ) / (2 * maxZ);
-        return 0.7 + 0.3 * normalizedZ; // Scale will be between 0.7 (furthest back) and 1.0 (furthest front)
+        // Scale will be between 0.7 (furthest back) and 1.0 (furthest front)
+        return 0.7 + 0.3 * normalizedZ; 
     }
 }
 
@@ -736,10 +734,10 @@ class DNAStrand {
     constructor() {
         this.points = [];
         this.time = 0;
-        this.amplitude = 120; // Increased amplitude for more width
-        this.frequency = 0.05; // Tighter helix turns
-        this.speed = 0.02;
-        this.spacing = 35; // Vertical spacing between base pairs
+        this.amplitude = 130; // SLIGHTLY INCREASED amplitude for wider spiral
+        this.frequency = 0.05; 
+        this.speed = 0.025; // SLIGHTLY INCREASED speed for faster rotation
+        this.spacing = 35; 
         this.maxZ = this.amplitude;
     }
 
@@ -806,14 +804,13 @@ class DNAStrand {
         ctx.stroke();
 
         // --- Draw the Nucleobase Point (Dot) on P1 ---
-        // We only draw the point once per segment, on p1
         if (isBackbone) {
             const pointRadius = 4;
             // Draw a subtle glow/shadow
             ctx.shadowBlur = 8 * scale1;
             ctx.shadowColor = 'rgba(100, 150, 255, 0.9)';
             
-            ctx.fillStyle = 'white'; // White dot for better visibility/glow
+            ctx.fillStyle = 'white'; 
             ctx.beginPath();
             ctx.arc(projectedX1, p1.y, pointRadius * scale1, 0, Math.PI * 2);
             ctx.fill();
@@ -836,7 +833,6 @@ class DNAStrand {
             }
 
             // 2. Draw Base Pair (to the point at the same Y but on the opposite side)
-            // We only need to draw the base pair once for each vertical level (e.g., from side 0 to side 1)
             const pairedOffset = p1.offset + Math.PI;
             // Find the paired point at the same Y level AND the opposite phase
             const p2 = this.points.find(p => p.y === p1.y && Math.abs(p.offset - pairedOffset) % (2 * Math.PI) < 0.01);

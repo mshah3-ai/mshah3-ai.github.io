@@ -4,9 +4,6 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>mithil shah</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,500;1,400&family=DM+Mono:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -21,17 +18,17 @@
       --blue-dim: #436fa8;
       --blue-soft: #edf4fe;
       --blue-glow: rgba(47, 93, 168, 0.08);
-      --serif: 'Lora', Georgia, serif;
-      --mono: 'DM Mono', monospace;
+      --sans: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      --mono: SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
     }
 
     html { scroll-behavior: smooth; }
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: var(--serif);
-      font-size: 16px;
-      line-height: 1.75;
+      font-family: var(--sans);
+      font-size: 15px;
+      line-height: 1.6;
       min-height: 100vh;
     }
 
@@ -46,13 +43,13 @@
     }
     .nav-home {
       font-family: var(--mono); font-size: 13px;
-      color: var(--blue); text-decoration: none; font-weight: 400; cursor: pointer;
-      letter-spacing: 0.02em;
+      color: var(--blue); text-decoration: none; font-weight: 500; cursor: pointer;
+      letter-spacing: -0.01em;
     }
     .nav-links { display: flex; gap: 2rem; list-style: none; }
     .nav-links a {
-      font-family: var(--mono); font-size: 12px; color: var(--muted);
-      text-decoration: none; letter-spacing: 0.04em; transition: color 0.2s; cursor: pointer;
+      font-family: var(--sans); font-size: 14px; color: var(--muted);
+      text-decoration: none; transition: color 0.2s; cursor: pointer;
     }
     .nav-links a:hover { color: var(--blue); }
 
@@ -74,21 +71,22 @@
     /* LEFT COL */
     .hero-eyebrow {
       font-family: var(--mono); font-size: 11px; color: var(--blue-dim);
-      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 1.2rem;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 1rem;
     }
     .hero-name {
-      font-size: clamp(2.4rem, 5vw, 3.4rem); font-weight: 400;
-      line-height: 1.1; margin-bottom: 1.6rem; color: var(--text);
+      font-size: clamp(2.2rem, 5vw, 3.2rem); font-weight: 700;
+      line-height: 1.15; margin-bottom: 1.5rem; color: var(--text);
+      letter-spacing: -0.03em;
     }
-    .hero-name em { font-style: italic; color: var(--blue); }
+    .hero-name em { font-style: normal; color: var(--blue); }
     .hero-bio {
-      font-size: 0.97rem; color: var(--muted); margin-bottom: 2rem; line-height: 1.85;
+      font-size: 0.98rem; color: var(--muted); margin-bottom: 1.5rem; line-height: 1.7;
     }
     .hero-bio a { color: var(--text); text-underline-offset: 3px; text-decoration-color: var(--border); transition: text-decoration-color 0.2s; }
     .hero-bio a:hover { text-decoration-color: var(--blue); }
     .tags { display: flex; flex-wrap: wrap; gap: 8px; margin-bottom: 2.5rem; }
     .tag {
-      font-family: var(--mono); font-size: 11px; padding: 4px 12px;
+      font-family: var(--sans); font-size: 12px; padding: 4px 12px;
       border: 1px solid var(--border); border-radius: 99px;
       color: var(--muted); background: var(--surface);
       transition: border-color 0.2s, color 0.2s;
@@ -98,7 +96,7 @@
     .spotify-wrap { margin-bottom: 0; }
     .mini-label {
       font-family: var(--mono); font-size: 11px; color: var(--muted);
-      letter-spacing: 0.06em; margin-bottom: 8px;
+      letter-spacing: 0.02em; margin-bottom: 8px; text-transform: uppercase;
     }
     .spotify-wrap iframe { border-radius: 10px; }
 
@@ -124,7 +122,7 @@
       object-fit: cover; border-radius: 11px;
     }
     .photo-placeholder-text {
-      font-family: var(--mono); font-size: 11px; color: var(--muted);
+      font-family: var(--sans); font-size: 12px; color: var(--muted);
       text-align: center; pointer-events: none; line-height: 1.6;
     }
     .photo-placeholder-icon { font-size: 1.6rem; opacity: 0.4; pointer-events: none; }
@@ -134,12 +132,12 @@
     .maya-inner { display: flex; flex-direction: column; align-items: center; gap: 10px; user-select: none; }
     #maya-svg { cursor: pointer; transition: transform 0.1s; display: block; }
     #maya-svg:active { transform: scale(0.96); }
-    .maya-mood { font-family: var(--mono); font-size: 11px; color: var(--muted); text-align: center; min-height: 1.4em; }
+    .maya-mood { font-family: var(--sans); font-size: 12px; color: var(--muted); text-align: center; min-height: 1.4em; }
     .maya-bar-wrap { width: 140px; background: var(--faint); border-radius: 99px; height: 5px; overflow: hidden; }
     .maya-bar-fill { height: 100%; background: var(--blue); border-radius: 99px; transition: width 0.4s ease; }
     .maya-actions { display: flex; gap: 6px; }
     .maya-btn {
-      font-family: var(--mono); font-size: 10px; padding: 4px 11px;
+      font-family: var(--sans); font-size: 11px; padding: 4px 12px;
       border: 1px solid var(--border); border-radius: 99px;
       background: var(--bg); color: var(--muted); cursor: pointer; transition: all 0.15s;
     }
@@ -150,18 +148,18 @@
     /* RESEARCH */
     .section-title {
       font-family: var(--mono); font-size: 11px; color: var(--muted);
-      letter-spacing: 0.1em; text-transform: uppercase; margin-bottom: 2.5rem;
+      letter-spacing: 0.05em; text-transform: uppercase; margin-bottom: 2.5rem;
     }
     .research-item { margin-bottom: 2.5rem; padding-bottom: 2.5rem; border-bottom: 1px solid var(--border); }
     .research-item:last-child { border-bottom: none; }
-    .research-role { font-size: 1.02rem; font-weight: 500; margin-bottom: 3px; color: var(--text); }
-    .research-where { font-family: var(--mono); font-size: 11px; color: var(--blue-dim); letter-spacing: 0.03em; margin-bottom: 3px; }
+    .research-role { font-size: 1.1rem; font-weight: 600; margin-bottom: 3px; color: var(--text); letter-spacing: -0.01em; }
+    .research-where { font-family: var(--sans); font-size: 13px; font-weight: 500; color: var(--blue-dim); margin-bottom: 3px; }
     .research-when { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-bottom: 10px; }
-    .research-note { font-size: 0.92rem; color: var(--muted); line-height: 1.7; }
+    .research-note { font-size: 0.95rem; color: var(--muted); line-height: 1.6; }
     .pub-item { margin-bottom: 1.8rem; }
-    .pub-title { font-size: 0.96rem; font-weight: 500; font-style: italic; margin-bottom: 4px; color: var(--text); }
+    .pub-title { font-size: 1rem; font-weight: 600; margin-bottom: 4px; color: var(--text); letter-spacing: -0.01em; }
     .pub-venue { font-family: var(--mono); font-size: 11px; color: var(--blue-dim); margin-bottom: 5px; }
-    .pub-note { font-size: 0.87rem; color: var(--muted); }
+    .pub-note { font-size: 0.9rem; color: var(--muted); }
     .awards-list { list-style: none; display: flex; flex-direction: column; gap: 12px; }
     .awards-list li { display: flex; gap: 1rem; align-items: baseline; }
     .award-year { font-family: var(--mono); font-size: 11px; color: var(--muted); min-width: 36px; }
@@ -175,28 +173,28 @@
     }
     .album-card:hover { border-color: var(--blue-dim); transform: translateY(-2px); }
     .album-emoji { font-size: 1.8rem; }
-    .album-name { font-size: 0.92rem; font-weight: 500; color: var(--text); }
+    .album-name { font-size: 0.95rem; font-weight: 600; color: var(--text); }
     .album-count { font-family: var(--mono); font-size: 11px; color: var(--muted); }
-    .album-caption { font-size: 0.81rem; color: var(--muted); font-style: italic; }
+    .album-caption { font-size: 0.85rem; color: var(--muted); }
     .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 1.5rem; animation: fadeIn 0.3s ease; }
     @keyframes fadeIn { from { opacity:0; transform: translateY(6px); } to { opacity:1; transform:none; } }
-    .photo-thumb { aspect-ratio:1; border-radius:8px; background:var(--surface); display:flex; align-items:center; justify-content:center; font-size:1.8rem; border:1px solid var(--border); transition:transform 0.15s; }
+    .photo-thumb { aspect-ratio:1; border-radius:8px; background:var(--surface); display:flex; align-items:center; justify-content:center; border:1px solid var(--border); transition:transform 0.15s; overflow: hidden; }
     .photo-thumb:hover { transform: scale(1.04); }
-    .back-btn { font-family:var(--mono); font-size:11px; color:var(--muted); background:none; border:none; cursor:pointer; padding:0; margin-bottom:1.5rem; transition:color 0.15s; }
+    .back-btn { font-family:var(--mono); font-size:11px; color:var(--muted); background:none; border:none; cursor:pointer; padding:0; margin-bottom:1.5rem; transition:color 0.15s; text-transform: uppercase; letter-spacing: 0.05em; }
     .back-btn:hover { color: var(--blue); }
 
     /* NOW */
     .now-grid { display: flex; flex-direction: column; gap: 2rem; margin-top: 1.5rem; }
     .now-grid var { font-style: normal; }
-    .now-key { font-family: var(--mono); font-size: 11px; color: var(--blue-dim); letter-spacing: 0.06em; margin-bottom: 6px; }
-    .now-val { font-size: 0.95rem; color: var(--muted); line-height: 1.7; }
+    .now-key { font-family: var(--mono); font-size: 11px; color: var(--blue-dim); letter-spacing: 0.05em; margin-bottom: 6px; text-transform: uppercase; }
+    .now-val { font-size: 0.98rem; color: var(--muted); line-height: 1.6; }
 
     /* CONTACT */
     .contact-links { display: flex; flex-direction: column; gap: 1rem; margin-top: 1.5rem; }
     .contact-link { font-family: var(--mono); font-size: 13px; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; transition: color 0.2s; }
     .contact-link:hover { color: var(--blue); }
     .contact-link::before { content: "->"; color: var(--muted); font-size: 11px; }
-    .contact-note { font-size: 0.85rem; color: var(--muted); font-style: italic; margin-top: 2.5rem; }
+    .contact-note { font-size: 0.88rem; color: var(--muted); margin-top: 2.5rem; }
   </style>
 </head>
 <body>
@@ -350,41 +348,40 @@
       <div class="album-card" onclick="openAlbum('dog')">
         <span class="album-emoji">🐶</span>
         <p class="album-name">Da Dog</p>
-        <p class="album-count">endless</p>
+        <p class="album-count">3 photos</p>
         <p class="album-caption">maya's portfolio. she insisted.</p>
       </div>
       <div class="album-card" onclick="openAlbum('volley')">
         <span class="album-emoji">🏐</span>
         <p class="album-name">net violations</p>
-        <p class="album-count">a few dozen</p>
+        <p class="album-count">2 photos</p>
         <p class="album-caption">i set, occasionally i spike</p>
       </div>
       <div class="album-card" onclick="openAlbum('imsa')">
         <span class="album-emoji">🔬</span>
         <p class="album-name">IMSA things</p>
-        <p class="album-count">too many</p>
+        <p class="album-count">2 photos</p>
         <p class="album-caption">what happens when nerds have free time</p>
       </div>
       <div class="album-card" onclick="openAlbum('conf')">
         <span class="album-emoji">🎤</span>
         <p class="album-name">conferences i survived</p>
-        <p class="album-count">several</p>
+        <p class="album-count">2 photos</p>
         <p class="album-caption">NeurIPS, ICLR, and my sleep schedule</p>
       </div>
       <div class="album-card" onclick="openAlbum('misc')">
         <span class="album-emoji">🎵</span>
         <p class="album-name">misc</p>
-        <p class="album-count">a lot</p>
+        <p class="album-count">1 photo</p>
         <p class="album-caption">concerts, food, aurora sunsets</p>
       </div>
     </div>
   </div>
 
   <div id="photo-view" style="display:none;">
-    <button class="back-btn" onclick="closeAlbum()">back to albums</button>
+    <button class="back-btn" onclick="closeAlbum()">← back to albums</button>
     <p id="photo-album-title" class="section-title"></p>
     <div class="photo-grid" id="photo-grid"></div>
-    <p style="color:var(--muted);font-size:0.82rem;font-style:italic;margin-top:1.5rem;font-family:var(--mono);">real photos coming eventually. these placeholders are very artistic.</p>
   </div>
 </section>
 
@@ -468,10 +465,10 @@ const tail = document.getElementById('maya-tail');
 let tailDir = 1, tailAngle = 0;
 
 const moods = {
-  low:  ['giving you the look', 'mildly unimpressed', 'needs attention'],
-  mid:  ['waiting to be pet', 'content, could be happier', 'watching you with big eyes'],
+  low:   ['giving you the look', 'mildly unimpressed', 'needs attention'],
+  mid:   ['waiting to be pet', 'content, could be happier', 'watching you with big eyes'],
   high: ['very happy right now', 'tail at full speed', 'this is her happy place'],
-  max:  ['peak maya energy', 'would like to lick your face', '100% good girl confirmed'],
+  max:   ['peak maya energy', 'would like to lick your face', '100% good girl confirmed'],
 };
 
 function updateMaya() {
@@ -528,21 +525,28 @@ setInterval(() => {
 setInterval(() => { happiness = Math.max(15, happiness - 1); updateMaya(); }, 4000);
 updateMaya();
 
-/* PHOTOS */
+/* PHOTOS DATA AND LOGIC */
 const albums = {
-  dog:   { title: 'Da Dog', emojis: ['images/IMG_2873.jpg','🐾','😴','🐕','🦮','🐾','🐶','🦴','😍'] },
-  volley:{ title: 'net violations', emojis: ['🏐','🤾','🏐','💥','🏆','😤','🏐','🤚','🎽'] },
-  imsa:  { title: 'IMSA things', emojis: ['🔬','💻','🧠','📚','☕','🤓','🔭','📐','🧪'] },
-  conf:  { title: 'conferences i survived', emojis: ['🎤','✈️','📜','🤝','🏙️','📊','🎓','🧳','😵'] },
-  misc:  { title: 'misc', emojis: ['🎵','🍜','🌆','📸','🎸','🌙','🎮','🌿','☀️'] },
+  dog:   { title: 'Da Dog', photos: ['IMG_2873.jpeg', 'IMG_3116.jpeg', 'IMG_3500.jpeg'] },
+  volley:{ title: 'net violations', photos: ['IMG_3561.jpeg', 'IMG_3883.jpeg'] },
+  imsa:  { title: 'IMSA things', photos: ['IMG_3959.jpeg', 'IMG_4150.jpeg'] },
+  conf:  { title: 'conferences i survived', photos: ['IMG_4200.jpeg', 'IMG_4385.jpeg'] },
+  misc:  { title: 'misc', photos: ['IMG_4410.jpeg'] },
 };
+
 function openAlbum(id) {
   document.getElementById('album-view').style.display = 'none';
   document.getElementById('photo-view').style.display = 'block';
   const d = albums[id];
   document.getElementById('photo-album-title').textContent = d.title;
-  document.getElementById('photo-grid').innerHTML = d.emojis.map(e => `<div class="photo-thumb">${e}</div>`).join('');
+  
+  document.getElementById('photo-grid').innerHTML = d.photos.map(src => `
+    <div class="photo-thumb">
+      <img src="${src}" style="width:100%; height:100%; object-fit:cover;" alt="Album photo" />
+    </div>
+  `).join('');
 }
+
 function closeAlbum() {
   document.getElementById('album-view').style.display = 'block';
   document.getElementById('photo-view').style.display = 'none';

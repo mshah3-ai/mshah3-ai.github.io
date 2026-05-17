@@ -205,7 +205,7 @@
     <li><a onclick="showPage('home')">home</a></li>
     <li><a onclick="showPage('research')">research</a></li>
     <li><a onclick="showPage('photos')">photos</a></li>
-    <li><a onclick="showPage('now')">now</a></li>
+    <li><a onclick="showPage('publications')">publications</a></li>
     <li><a onclick="showPage('contact')">contact</a></li>
   </ul>
 </nav>
@@ -309,25 +309,6 @@
   </div>
 
   <hr class="divider" />
-  <p class="section-title">publications</p>
-
-  <div class="pub-item">
-    <p class="pub-title">Tensor-SAE: Structured Sparse Autoencoders for Interpretable and Efficient Image Representations</p>
-    <p class="pub-venue">PMLR 2026 / NeurIPS Imageomics Workshop 2025</p>
-    <p class="pub-note">with Tanush Shastry, Soham Batra, Laksh Patel, and others. introduced a structured sparse autoencoder decoding through a learned bank of rank-1 tensor atoms (color x height x width).</p>
-  </div>
-  <div class="pub-item">
-    <p class="pub-title">Hyperbolic Few-Shot Learning for Taxonomic Plant Classification</p>
-    <p class="pub-venue">NeurIPS Imageomics Workshop 2025</p>
-    <p class="pub-note">developed a self-supervised framework to pre-train vision models on large-scale unlabeled datasets for robust in-domain representations.</p>
-  </div>
-  <div class="pub-item">
-    <p class="pub-title">Un-Distillable LLMs via Entropy-Perturbed Logits</p>
-    <p class="pub-venue">2025</p>
-    <p class="pub-note">with Andrew Bae and Laksh Patel. a framework for constructing provably un-distillable large language models by applying entropy-based perturbations to output logits, preserving model utility while preventing effective knowledge distillation.</p>
-  </div>
-
-  <hr class="divider" />
   <p class="section-title">awards</p>
   <ul class="awards-list">
     <li><span class="award-year">2026</span><span>AIME, score 11/15</span></li>
@@ -371,7 +352,58 @@
     <div class="photo-grid" id="photo-grid"></div>
   </div>
 </section>
+<section id="publications">
+  <p class="section-title">publications</p>
 
+  <p style="color:var(--muted);font-size:0.93rem;margin-bottom:2.5rem;">
+    papers, workshops, and things i've somehow convinced reviewers to accept.
+  </p>
+
+
+  <div class="pub-item">
+    <p class="pub-venue" style="font-size:15px;margin-bottom:14px;">ICLR</p>
+
+    <p class="pub-title">
+      T. A. Shastry, S. Batra, L. Patel, A. Lala, A. Bae, S. Karuturi,
+      <strong>M. Shah</strong>, and N. N. Shanbhag,
+      "Tensor-SAE: Structured Sparse Autoencoders for Interpretable and Efficient Image Representations",
+      ICLR 2026 GRaM Workshop
+    </p>
+
+    <p class="pub-note">
+      to appear in PMLR '26. structured sparse autoencoders + interpretability. probably the paper i spent the most time staring at tensor shapes for.
+    </p>
+  </div>
+
+
+  <div class="pub-item">
+    <p class="pub-venue" style="font-size:15px;margin-bottom:14px;">NeurIPS</p>
+
+    <p class="pub-title">
+      <strong>M. Shah</strong>,
+      "Hyperbolic Few-Shot Learning for Taxonomic Plant Classification",
+      NeurIPS 2025 Imageomics Workshop
+    </p>
+
+    <p class="pub-note">
+      computer vision + representation learning for taxonomic classification. started as plant classification and somehow turned into geometry.
+    </p>
+
+    <br>
+
+    <p class="pub-title">
+      <strong>M. Shah</strong>, A. Bae, and L. Patel,
+      "Un-Distillable LLMs via Entropy-Perturbed Logits",
+      Lock-LLM Workshop: Prevent Unauthorized Knowledge Use from Large Language Models
+    </p>
+
+    <p class="pub-note">
+      llm security. making language models harder to steal without destroying performance.
+    </p>
+
+  </div>
+
+</section>
 <section id="now">
   <p class="section-title">now</p>
   <p style="color:var(--muted);font-size:0.93rem;margin-bottom:2.5rem;">what i'm working on and thinking about, as of may 2026.</p>
